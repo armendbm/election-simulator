@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use function PHPUnit\Framework\fileExists;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,11 +16,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    if(!fileExists($nav_path = file_get_contents(resource_path("html/navbar.html")))){  ddd('file does not exist');  } 
+
+    return view('welcome', [
+        'navbar' => $nav_path
+    ]);
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    if(!fileExists($nav_path = file_get_contents(resource_path("html/navbar.html")))){  ddd('file does not exist');  } 
+
+    return view('dashboard', [
+        'navbar' => $nav_path
+    ]);
 })->middleware(['auth'])->name('dashboard');
 
 Route::get('/documentation', function () {
