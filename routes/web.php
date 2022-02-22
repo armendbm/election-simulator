@@ -17,7 +17,7 @@ use function PHPUnit\Framework\fileExists;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -25,6 +25,6 @@ Route::get('/dashboard', function () {
 
 Route::get('/documentation', function () {
     return view('documentation');
-});
+})->name('documentation');
 
 require __DIR__.'/auth.php';
