@@ -27,7 +27,18 @@
             </li>   
         </ul>
     </div>
-    <a class="nav-link" href="/login"><i class="bi bi-person-square"></i> Log in</a>  
-    <a class="nav-link" href="/register"><i class="bi bi-file-earmark-text"></i> Register</a>
+    @auth
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <a class="nav-link" href="route('logout')"
+                    onclick="event.preventDefault(); this.closest('form').submit();">
+                <i class="bi bi-person-square"></i> Log out
+            </a>
+        </form>
+    @endauth
+    @guest
+        <a class="nav-link" href="/login"><i class="bi bi-person-square"></i> Log in</a>  
+        <a class="nav-link" href="/register"><i class="bi bi-file-earmark-text"></i> Register</a>
+    @endguest
 </nav>
 
