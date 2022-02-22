@@ -24,12 +24,7 @@
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
-            
-            {{-- vvvvvvvvvvvvvvvvvvvvvvvvvvvvvv --}}
-            {{-- @include('layouts.navigation') --}}
-            
-            <!-- navbar -->
-            {{ $navbar }}
+            @include('layouts.navigation')
 
             <!-- Page Heading -->
             <header class="container bg-secondary shadow rounded my-3 ">

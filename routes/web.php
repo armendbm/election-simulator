@@ -16,19 +16,11 @@ use function PHPUnit\Framework\fileExists;
 */
 
 Route::get('/', function () {
-    if(!fileExists($nav_path = file_get_contents(resource_path("html/navbar.html")))){  ddd('file does not exist');  } 
-
-    return view('welcome', [
-        'navbar' => $nav_path
-    ]);
+    return view('welcome');
 });
 
 Route::get('/dashboard', function () {
-    if(!fileExists($nav_path = file_get_contents(resource_path("html/navbar.html")))){  ddd('file does not exist');  } 
-
-    return view('dashboard', [
-        'navbar' => $nav_path
-    ]);
+    return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
 Route::get('/documentation', function () {

@@ -1,10 +1,4 @@
 <x-app-layout>
-
-    <x-slot name="navbar">
-        {{-- Narbar --}}
-        <?= $navbar; ?>
-    </x-slot>
-
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight py-1">
             {{ __('Home Page (This part is the header from app.blade.php)') }}
