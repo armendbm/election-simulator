@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\User;
 
 use function PHPUnit\Framework\fileExists;
 
@@ -24,7 +25,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::get('/documentation', function () {
-    return view('documentation');
+    return view('documentation', ['users' => User::all()]);
 });
 
 require __DIR__.'/auth.php';
