@@ -38,5 +38,10 @@
                 {{ $slot }}
             </main>
         </div>
+        @include('sweetalert::alert')
     </body>
+
+    {{-- <script>
+        $
+    </script> --}}
 </html>
