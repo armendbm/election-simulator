@@ -12,8 +12,8 @@ class UserController extends Controller
 {
     //
     function delete($id){
-        // $data = User::findOrFail($id);
-        // $data->delete();
+        $data = User::findOrFail($id);
+        $data->delete();
         Alert::warning('Account Deleted', ' Your account have been deleted!');
         return redirect('/');//->with('alert', 'Account Deleted!');
     }
