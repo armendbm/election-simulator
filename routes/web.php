@@ -31,6 +31,10 @@ Route::get('/documentation', function () {
     return view('documentation', ['resultHandler' => new result_handler()]);
 })->name('documentation');
 
+Route::get('/votingscreen', function () {
+    return view('votingscreen');
+})->name('votingscreen');
+
 Route::get('delete/{id}', [UserController::class,'delete']);
 Route::get('update/{id}', [UserController::class,'update']);
 Route::get('updatepassword/{id}', [UserController::class,'updatePassword']);
