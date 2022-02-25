@@ -1,8 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\UserController;
+use RealRashid\SweetAlert\Facades\Alert;
 use function PHPUnit\Framework\fileExists;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -26,5 +28,10 @@ Route::get('/dashboard', function () {
 Route::get('/documentation', function () {
     return view('documentation');
 })->name('documentation');
+
+Route::get('delete/{id}', [UserController::class,'delete']);
+Route::get('update/{id}', [UserController::class,'update']);
+Route::get('updatepassword/{id}', [UserController::class,'updatePassword']);
+Route::post('edit/', [UserController::class,'edit']);
 
 require __DIR__.'/auth.php';
