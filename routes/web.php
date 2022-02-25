@@ -1,10 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Models\User;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\result_handler;
+use RealRashid\SweetAlert\Facades\Alert;
 
 use function PHPUnit\Framework\fileExists;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +21,7 @@ use function PHPUnit\Framework\fileExists;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -27,6 +29,11 @@ Route::get('/dashboard', function () {
 
 Route::get('/documentation', function () {
     return view('documentation', ['resultHandler' => new result_handler()]);
-});
+})->name('documentation');
+
+Route::get('delete/{id}', [UserController::class,'delete']);
+Route::get('update/{id}', [UserController::class,'update']);
+Route::get('updatepassword/{id}', [UserController::class,'updatePassword']);
+Route::post('edit/', [UserController::class,'edit']);
 
 require __DIR__.'/auth.php';

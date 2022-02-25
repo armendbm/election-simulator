@@ -7,13 +7,19 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/">Home
+                    {!! Route::is('home') ? ' <span class="sr-only">(current)</span>' : ''!!}
+                </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/dashboard">Dashboard</a>
+                <a class="nav-link" href="/dashboard">Dashboard
+                    {!! Route::is('dashboard') ? ' <span class="sr-only">(current)</span>' : ''!!}
+                </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/documentation">Documentation</a>
+                <a class="nav-link" href="/documentation">Documentation
+                    {!! Route::is('documentation') ? ' <span class="sr-only">(current)</span>' : ''!!}
+                </a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
