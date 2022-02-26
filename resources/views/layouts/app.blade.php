@@ -17,6 +17,12 @@
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
+        <!--Sweet Alert Codes-->
+        <!--JQuery CDN-->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <!--Sweet Alert CDN-->
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         {{-- <title>{{ config('app.name', 'Laravel') }}</title> --}}
         <title>{{ __('Election To-Go') }}</title>
@@ -41,7 +47,4 @@
         @include('sweetalert::alert')
     </body>
 
-    {{-- <script>
-        $
-    </script> --}}
 </html>
