@@ -35,6 +35,8 @@ class ElectionController extends Controller
             'start_at' => $StartTime,
             'end_at' => $EndTime,
             'owner_id' => $OwnerID,
+            'created_at' =>$StartTime,
+            'updated_at' =>$StartTime,
         ];
     }
 

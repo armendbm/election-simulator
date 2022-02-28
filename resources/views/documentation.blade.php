@@ -12,6 +12,7 @@
     if (auth()->user() != null)
     {
         $username = auth()->user()->name;
+        //$VoteHandler->createElection(auth()->user()->id, $now, $now);
         if (auth()->user()->own_elections() != null)
         {
             $electionSet = auth()->user()->own_elections()->getResults();
@@ -26,7 +27,7 @@
                 </div>
                 <div class="p-2 bg-white border-b border-gray-200">
                     @foreach($electionSet as $election)
-                        <p>{{$election->name}} is owned by user: {{$election->owner_id}}</p>
+                        <p>{{$election->name}} is owned by user {{$election->owner_id}} at {{$election->created_at}}</p>
                     @endforeach
                 </div>
             </div>
