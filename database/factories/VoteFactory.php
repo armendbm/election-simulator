@@ -14,7 +14,9 @@ class VoteFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'data' => $this->faker->name(),
+            'user_id' => 1,
+            'election_id' => 1,
         ];
     }
 }

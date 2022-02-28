@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreElectionRequest;
 use App\Http\Requests\UpdateElectionRequest;
 use App\Models\Election;
+use Illuminate\Support\Str;
 
 class ElectionController extends Controller
 {
@@ -23,9 +24,18 @@ class ElectionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($OwnerID, $StartTime, $EndTime)
     {
-        //
+        return [
+            'name' => Str::random(4),
+            'description' => '',
+            'system' => 'fptp',
+            'public' => true,
+            'anonymous' => true,
+            'start_at' => $StartTime,
+            'end_at' => $EndTime,
+            'owner_id' => $OwnerID,
+        ];
     }
 
     /**

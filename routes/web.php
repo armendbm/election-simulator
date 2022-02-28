@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\result_handler;
+use App\Http\Controllers\ResultHandler;
+use App\Http\Controllers\VoteHandler;
 use RealRashid\SweetAlert\Facades\Alert;
 
 use function PHPUnit\Framework\fileExists;
@@ -28,18 +29,13 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::get('/documentation', function () {
-    return view('documentation', ['resultHandler' => new result_handler()]);
+    return view('documentation', ['ResultHandler' => new ResultHandler(), 'VoteHandler' => new VoteHandler(), 'now' => now()]);
 })->name('documentation');
 
-<<<<<<< HEAD
-
-// Below are the Route created for Dashboard ================================
-=======
 Route::get('/votingscreen', function () {
     return view('votingscreen');
 })->name('votingscreen');
 
->>>>>>> ES-5-voting-screen
 Route::get('delete/{id}', [UserController::class,'delete']);
 Route::get('updateUserName/{id}', [UserController::class,'updateUserName']);
 Route::post('editUserName/', [UserController::class,'editUserName']);
