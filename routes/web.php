@@ -31,15 +31,11 @@ Route::get('/documentation', function () {
     return view('documentation', ['resultHandler' => new result_handler()]);
 })->name('documentation');
 
-<<<<<<< HEAD
-
-// Below are the Route created for Dashboard ================================
-=======
 Route::get('/votingscreen', function () {
     return view('votingscreen');
 })->name('votingscreen');
 
->>>>>>> ES-5-voting-screen
+// Below are the Route created for Dashboard ================================
 Route::get('delete/{id}', [UserController::class,'delete']);
 Route::get('updateUserName/{id}', [UserController::class,'updateUserName']);
 Route::post('editUserName/', [UserController::class,'editUserName']);
@@ -47,6 +43,5 @@ Route::get('updatePassword/{id}', [UserController::class,'updatePassword']);
 Route::post('editPassword/', [UserController::class,'editPassword']);
 Route::get('updateEmail/{id}', [UserController::class,'updateEmail']);
 Route::post('editEmail/', [UserController::class,'editEmail']);
-// Above are the Route created for Dashboard ================================
 
 require __DIR__.'/auth.php';
