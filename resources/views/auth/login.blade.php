@@ -14,7 +14,7 @@
                     </div>
                 @endforeach
             @endif
-            <form method="POST" action="{{ route('login') }}">
+            <form method="POST" action="{{ route('login') }}" class="needs-validation" novalidate>
                 @csrf
                 <div class="form-floating mb-3">
                     <input type="email" name="email" id="email" class="form-control" value="{{ old('email') }}" placeholder="Email address" required
@@ -23,10 +23,16 @@
                         @endif
                     >
                     <label for="email">Email address</label>
+                    <div class="invalid-feedback">
+                        Please enter a valid email address.
+                    </div>
                 </div>
                 <div class="form-floating mb-3">
                     <input type="password" name="password" id="password" class="form-control" placeholder="Password" required autocomplete="current-password" autofocus>
                     <label for="password">Password</label>
+                    <div class="invalid-feedback">
+                        Please enter your password.
+                    </div>
                 </div>
                 <div class="d-flex justify-content-between checkbox mb-3">
                     <label>

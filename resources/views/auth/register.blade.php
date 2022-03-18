@@ -14,7 +14,7 @@
                     </div>
                 @endforeach
             @endif
-            <form method="POST" action="{{ route('register') }}">
+            <form method="POST" action="{{ route('register') }}" class="needs-validation" novalidate>
                 @csrf
                 <div class="form-floating mb-3">
                     <input type="text" name="name" id="name" class="form-control" value="{{ old('name') }}" placeholder="Name" required
@@ -23,18 +23,30 @@
                         @endif
                     >
                     <label for="name">Name</label>
+                    <div class="invalid-feedback">
+                        Please enter your name.
+                    </div>
                 </div>
                 <div class="form-floating mb-3">
                     <input type="email" name="email" id="email" class="form-control" value="{{ old('email') }}" placeholder="Email address" required>
                     <label for="email">Email address</label>
+                    <div class="invalid-feedback">
+                        Please enter a valid email address.
+                    </div>
                 </div>
                 <div class="form-floating mb-3">
                     <input type="password" name="password" id="password" class="form-control" placeholder="Password" required minlength="8" autocomplete="new-password" autofocus>
                     <label for="password">Password</label>
+                    <div class="invalid-feedback">
+                        Please enter a password with at least 8 characters.
+                    </div>
                 </div>
                 <div class="form-floating mb-3">
                     <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" placeholder="Confirm password" required>
                     <label for="password_confirmation">Confirm password</label>
+                    <div class="invalid-feedback">
+                        Please confirm your password.
+                    </div>
                 </div>
                 <div class="mb-3 text-end">
                     <a href="{{ route('login') }}">Already registered?</a>
