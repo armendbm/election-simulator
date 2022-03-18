@@ -1,36 +1,31 @@
 <x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
-
-        <div class="mb-4 text-sm text-gray-600">
-            {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+    <div class="card">
+        <div class="card-header text-center">
+            <h1 class="fw-normal">Elections To-Go</h1>
+            <h3 class="fw-light">Forgot password</p>
         </div>
-
-        <!-- Session Status -->
-        <x-auth-session-status class="mb-4" :status="session('status')" />
-
-        <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
-
-        <form method="POST" action="{{ route('password.email') }}">
-            @csrf
-
-            <!-- Email Address -->
-            <div>
-                <x-label for="email" :value="__('Email')" />
-
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <x-button>
-                    {{ __('Email Password Reset Link') }}
-                </x-button>
-            </div>
-        </form>
-    </x-auth-card>
+        <div class="card-body">
+            @if (count($errors) > 0)
+                @foreach ($errors->all() as $message)
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>Whoops!</strong>
+                        {{ $message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endforeach
+            @endif
+            <p class="text-center">Forgot your password? No problem. Just let us know your email address and we will email you a password-reset link that will allow you to choose a new one.</p>
+            <form method="POST" action="{{ route('password.email') }}" class="needs-validation" novalidate>
+                @csrf
+                <div class="form-floating mb-3">
+                    <input type="email" name="email" id="email" class="form-control" placeholder="Email address" required>
+                    <label for="email">Email address</label>
+                    <div class="invalid-feedback">
+                        Please enter a valid email address.
+                    </div>
+                </div>
+                <button class="w-100 btn btn-lg btn-primary" type="submit">Email password-reset link</button>
+            </form>
+        </div>
+    </div>
 </x-guest-layout>

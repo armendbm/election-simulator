@@ -1,9 +1,7 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+    <h2>
+        {{ __('Dashboard') }}
+    </h2>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -31,9 +29,9 @@
                 </div>
 
                 <div class="float-right mt-4 ">
-                    <x-button onclick="deleteClick()" class="ml-4 mb-4 bg-danger">
+                    <button onclick="deleteClick()" class="btn ml-4 mb-4 btn-danger">
                         Delete Account
-                    </x-button>
+                    </button>
                 </div>    
             </div>
         </div>

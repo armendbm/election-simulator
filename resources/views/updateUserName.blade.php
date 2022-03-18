@@ -1,9 +1,4 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight py-1">
-            {{ __('Home Page (This part is the header from app.blade.php)') }}
-        </h2>
-    </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -23,15 +18,13 @@
                     </div>
 
                     <div class="float-right border-t border-gray-200">
-                        <x-button class="bg-primary mt-3" type="submit">
+                        <button class="btn btn-primary mt-3" type="submit">
                                 {{ __('Update') }}              
-                        </x-button>
+                        </button>
                         
-                        <x-button class="ml-4 bg-danger mr-4">
-                            <a href="/dashboard">
-                                {{ __('Cancel') }}    
-                            </a>
-                        </x-button>
+                        <a href="/dashboard" class="btn btn-danger mt-3">
+                            {{ __('Cancel') }}    
+                        </a>
 
                         @error('name') <span class="ml-4 text-danger error">{{ $message }}</span>@enderror
 

@@ -1,59 +1,58 @@
 <x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
-
-        <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
-
-        <form method="POST" action="{{ route('register') }}">
-            @csrf
-
-            <!-- Name -->
-            <div>
-                <x-label for="name" :value="__('Name')" />
-
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
-            </div>
-
-            <!-- Email Address -->
-            <div class="mt-4">
-                <x-label for="email" :value="__('Email')" />
-
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
-            </div>
-
-            <!-- Password -->
-            <div class="mt-4">
-                <x-label for="password" :value="__('Password')" />
-
-                <x-input id="password" class="block mt-1 w-full"
-                                type="password"
-                                name="password"
-                                required autocomplete="new-password" />
-            </div>
-
-            <!-- Confirm Password -->
-            <div class="mt-4">
-                <x-label for="password_confirmation" :value="__('Confirm Password')" />
-
-                <x-input id="password_confirmation" class="block mt-1 w-full"
-                                type="password"
-                                name="password_confirmation" required />
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
-                </a>
-
-                <x-button class="ml-4">
-                    {{ __('Register') }}
-                </x-button>
-            </div>
-        </form>
-    </x-auth-card>
+    <div class="card">
+        <div class="card-header text-center">
+            <h1 class="fw-normal">Elections To-Go</h1>
+            <h3 class="fw-light">Register</p>
+        </div>
+        <div class="card-body">
+            @if (count($errors) > 0)
+                @foreach ($errors->all() as $message)
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>Whoops!</strong>
+                        {{ $message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endforeach
+            @endif
+            <form method="POST" action="{{ route('register') }}" class="needs-validation" novalidate>
+                @csrf
+                <div class="form-floating mb-3">
+                    <input type="text" name="name" id="name" class="form-control" value="{{ old('name') }}" placeholder="Name" required
+                        @if (!old('name'))
+                            autofocus
+                        @endif
+                    >
+                    <label for="name">Name</label>
+                    <div class="invalid-feedback">
+                        Please enter your name.
+                    </div>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="email" name="email" id="email" class="form-control" value="{{ old('email') }}" placeholder="Email address" required>
+                    <label for="email">Email address</label>
+                    <div class="invalid-feedback">
+                        Please enter a valid email address.
+                    </div>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="password" name="password" id="password" class="form-control" placeholder="Password" required minlength="8" autocomplete="new-password" autofocus>
+                    <label for="password">Password</label>
+                    <div class="invalid-feedback">
+                        Please enter a password with at least 8 characters.
+                    </div>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" placeholder="Confirm password" required>
+                    <label for="password_confirmation">Confirm password</label>
+                    <div class="invalid-feedback">
+                        Please confirm your password.
+                    </div>
+                </div>
+                <div class="mb-3 text-end">
+                    <a href="{{ route('login') }}">Already registered?</a>
+                </div>
+                <button class="w-100 btn btn-lg btn-primary" type="submit">Register</button>
+            </form>
+        </div>
+    </div>
 </x-guest-layout>
