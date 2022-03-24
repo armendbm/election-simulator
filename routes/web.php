@@ -35,6 +35,10 @@ Route::get('/votingscreen', function () {
     return view('votingscreen');
 })->name('votingscreen');
 
+Route::get('/customizedElection', function () {
+    return view('customizedElection');
+})->middleware(['auth'])->name('customizedElection');
+
 // Below are the Route created for Dashboard ================================
 Route::get('delete/{id}', [UserController::class,'delete']);
 Route::get('updateUserName/{id}', [UserController::class,'updateUserName']);
