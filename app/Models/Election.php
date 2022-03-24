@@ -12,6 +12,10 @@ class Election extends Model
 
     protected $casts = [
         'system' => VotingSystem::class,
+        'start_at' => 'datetime:Y-m-d',
+        'end_at' => 'datetime:Y-m-d',
+        'created_at' => 'datetime:Y-m-d',
+        'updated_at' => 'datetime:Y-m-d',
     ];
 
     public function owner()

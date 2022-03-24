@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+
 use App\Http\Requests\StoreElectionRequest;
 use App\Http\Requests\UpdateElectionRequest;
 use App\Models\Election;
@@ -25,7 +27,7 @@ class ElectionController extends Controller
      */
     public function create()
     {
-        //
+        return view('elections.create');
     }
 
     /**
@@ -34,9 +36,20 @@ class ElectionController extends Controller
      * @param  \App\Http\Requests\StoreElectionRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreElectionRequest $request)
+    /* public function store(StoreElectionRequest $request) */
+    public function store(Request $request)
     {
-        //
+        $election = new Election;
+        $election->name = $request->name;
+        $election->description = $request->description;
+        $election->system = $request->system;
+        $election->public = $request->has('public');
+        $election->anonymous = $request->has('anonymous');
+        $election->start_at = $request->start_at;
+        $election->end_at = $request->end_at;
+        $request->user()->own_elections()->save($election);
+
+        return redirect(route('dashboard'));
     }
 
     /**
@@ -81,6 +94,7 @@ class ElectionController extends Controller
      */
     public function destroy(Election $election)
     {
-        //
+        $election->delete();
+        return redirect(route('dashboard'));
     }
 }
