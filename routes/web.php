@@ -1,8 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ElectionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\result_handler;
+use App\Models\Election;
 use RealRashid\SweetAlert\Facades\Alert;
 
 use function PHPUnit\Framework\fileExists;
@@ -24,7 +26,7 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('dashboard', ['elections' => Election::all()]);
 })->middleware(['auth'])->name('dashboard');
 
 Route::get('/documentation', function () {
@@ -47,5 +49,7 @@ Route::get('updatePassword/{id}', [UserController::class,'updatePassword']);
 Route::post('editPassword/', [UserController::class,'editPassword']);
 Route::get('updateEmail/{id}', [UserController::class,'updateEmail']);
 Route::post('editEmail/', [UserController::class,'editEmail']);
+
+Route::resource('elections', ElectionController::class);
 
 require __DIR__.'/auth.php';
