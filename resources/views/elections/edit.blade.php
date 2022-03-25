@@ -59,8 +59,7 @@
                     <div class="mb-3">
                         <label for="system" class="form-label">System</label>
                         <select name="system" id="system" class="form-select" aria-label="System" required>
-                            <option selected disabled value="">Choose...</option>
-                            <option value="fptp">FPTP</option>
+                            <option selected value="fptp">FPTP</option>
                         </select>
                         <div class="invalid-feedback">
                             Please select a system.
@@ -86,14 +85,14 @@
                     </div>
                     <div class="mb-3">
                         <label for="start_at" class="form-label">Start Date</label>
-                        <input type="datetime-local" name="start_at" id="start_at" class="form-control" required>
+                        <input type="datetime-local" name="start_at" id="start_at" class="form-control" value="{{ $election->start_at->format('Y-m-d\TH:i:s') }}" required>
                         <div class="invalid-feedback">
                             Please choose a date.
                         </div>
                     </div>
                     <div class="mb-3">
                         <label for="end_at" class="form-label">End Date</label>
-                        <input type="datetime-local" name="end_at" id="end_at" class="form-control" required>
+                        <input type="datetime-local" name="end_at" id="end_at" class="form-control" value="{{ $election->end_at->format('Y-m-d\TH:i:s') }}" required>
                         <div class="invalid-feedback">
                             Please choose a date.
                         </div>
