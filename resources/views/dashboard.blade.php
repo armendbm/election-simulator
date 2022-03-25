@@ -1,4 +1,5 @@
 <x-app-layout>
+    <br>
     <h2>
         {{ __('Dashboard') }}
     </h2>
@@ -10,7 +11,7 @@
                     <p class="ml-3 my-3 h5"><strong>{{ auth()->user()->name }}'s Information</strong></p>
                 </div>
                 <div class="p-6 bg-white ">
-                    Id: {{ auth()->user()->id }}  
+                    User ID: {{ auth()->user()->id }}  
                 </div>
                 <div class="p-6 bg-white ">
                     Username: {{ auth()->user()->name }}  <a class="ml-2 link-primary" href="updateUserName/{{ auth()->user()->id }}"><i class="bi bi-vector-pen"></i>edit</a>

@@ -1,4 +1,5 @@
 <x-app-layout>
+    <br>
     <h2>
         {{ __('Documentation') }}
     </h2>

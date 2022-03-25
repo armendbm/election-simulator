@@ -12,25 +12,25 @@
                     
                     <div class="input-group input-group-sm my-4">
                         <div class="input-group-prepend">
-                          <span class="input-group-text" id="inputGroup-sizing-sm">Password</span>
+                          <span class="input-group-text" id="inputGroup-sizing-sm">New Password</span>
                         </div>
                         <input type="password" name="password1" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="">
                     </div>
 
                     <div class="input-group input-group-sm my-4">
                         <div class="input-group-prepend">
-                          <span class="input-group-text" id="inputGroup-sizing-sm">Confirm</span>
+                          <span class="input-group-text" id="inputGroup-sizing-sm">New Confirm</span>
                         </div>
                         <input type="password" name="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="">
                     </div>
 
-                    <div class="float-right border-t border-gray-200">
+                    <div class="float-left border-t border-gray-200">
                         <button class="btn btn-primary mt-3" type="submit">
-                                {{ __('Update') }}              
+                                {{ __('Update') }}
                         </button>
                         
                         <a href="/dashboard" class="btn btn-danger mt-3">
-                            {{ __('Cancel') }}    
+                            {{ __('Cancel') }}
                         </a>
 
                         @error('password') <span class="ml-4 text-danger error">{{ $message }}</span>@enderror

@@ -4,7 +4,7 @@
             <h1 class="fw-normal">Elections To-Go</h1>
             <h3 class="fw-light">Sign in</p>
         </div>
-        <div class="card-body">
+        <div class="card-body text-center">
             @if (count($errors) > 0)
                 @foreach ($errors->all() as $message)
                     <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -42,6 +42,8 @@
                 </div>
                 <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
             </form>
+            <br>
+            <a href="/" class="w-80 btn btn-md btn-secondary">Back Home</a>
         </div>
     </div>
 </x-guest-layout>

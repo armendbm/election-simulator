@@ -1,4 +1,5 @@
 <x-app-layout>
+    <br>
     <h2>
         {{ __('Voting Screen') }}
     </h2>
