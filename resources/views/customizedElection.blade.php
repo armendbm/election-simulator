@@ -18,6 +18,7 @@
                             <th ><strong> Actions: </strong></th>
                         </tr>
                     </thead>
+
                     <tbody>
                         @foreach ($votes as $vote)
                             <tr>
@@ -27,9 +28,11 @@
                                     <button type="button" class="btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#editmodal">
                                         Edit
                                     </button>
+                                    @if (count($votes) > 1)
                                     <button onclick="deleteClick()" class="btn-sm ml-4 btn-danger">
                                         Delete
                                     </button>
+                                     @endif
                                 </td>
                             </tr>
                         @endforeach

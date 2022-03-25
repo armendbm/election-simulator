@@ -44,6 +44,16 @@ Route::get('/votingscreen', function () {
 Route::get('/customizedElection', function () {
     $votes = Vote::all();
     $arrLen = count($votes);
+    if($arrLen == 0){
+        for($x=0;$x<3;$x++){
+            $data = new Vote;
+            $data->id = $x;
+            $data->data = 33;
+            $data->user_id = 1;
+            $data->election_id = 1;
+            $data->save();
+        }
+    }
     $arrID = array(); 
     for($x=0; $x<sizeof($votes);$x++)
         array_push($arrID,$votes[$x]['id']);
@@ -71,7 +81,7 @@ Route::get('/customizedElection', function () {
                     ])
                     ->setXAxis($arrID);
     
-    return view('customizedElection', compact('chart', 'chart2', 'votes'));
+    return view('customizedElection', compact('chart', 'chart2', 'votes', 'arrLen'));
 })->middleware(['auth'])->name('customizedElection');
 Route::get('deleteVote/{id}', [VoteController::class,'delete']);
 Route::post('editData/', [VoteController::class,'editData']);
