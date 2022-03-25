@@ -35,12 +35,13 @@
                         </button>
                     </div>    
                     <a href="{{ route('elections.create') }}" class="btn ml-4 mb-4 btn-primary" type="submit">Create Election</a>
-                    @if (count($elections) > 0)
+                    @if (count(Auth::user()->own_elections()->get()) > 0)
                         <h3>My Elections</h3>
                         <ul class="list-group list-group-flush">
-                            @foreach ($elections as $election)
+                            @foreach (Auth::user()->own_elections()->get() as $election)
                                 <li class="list-group-item">
                                     {{ $election->name }} {{ $election->description }} {{ $election->system->value }} {{ $election->public }} {{ $election->anonymous }} {{ $election->start_at }} {{ $election->end_at }}
+                                    <a href="{{ route('elections.edit', ['election' => $election->id]) }}" class="btn btn-primary">Edit</a>
                                     <form method="POST" action="{{ route('elections.destroy', ['election' => $election->id]) }}">
                                         @method('delete')
                                         @csrf

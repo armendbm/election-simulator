@@ -35,8 +35,8 @@
                             <label for="public" class="form-check-label">Public?</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" name="anonymous" id="public" value="1" checked>
-                            <label for="public" class="form-check-label">Anonymous?</label>
+                            <input class="form-check-input" type="checkbox" name="anonymous" id="anonymous" value="1" checked>
+                            <label for="anonymous" class="form-check-label">Anonymous?</label>
                         </div>
                     </div>
                     <div class="mb-3">

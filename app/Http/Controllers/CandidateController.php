@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+
 use App\Http\Requests\StoreCandidateRequest;
 use App\Http\Requests\UpdateCandidateRequest;
 use App\Models\Candidate;
+use App\Models\Election;
 
 class CandidateController extends Controller
 {
@@ -34,9 +38,19 @@ class CandidateController extends Controller
      * @param  \App\Http\Requests\StoreCandidateRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCandidateRequest $request)
+    /* public function store(StoreCandidateRequest $request) */
+    public function store(Request $request, Election $election)
     {
-        //
+        if (! Gate::allows('edit-election', $election)) {
+            abort(403);
+        }
+
+        $candidate = new Candidate;
+        $candidate->name = $request->name;
+        $candidate->description = $request->description;
+        $election->candidates()->save($candidate);
+
+        return redirect(route('elections.edit', ['election' => $election->id]));
     }
 
     /**
@@ -79,8 +93,13 @@ class CandidateController extends Controller
      * @param  \App\Models\Candidate  $candidate
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Candidate $candidate)
+    public function destroy(Election $election, Candidate $candidate)
     {
-        //
+        if (! Gate::allows('edit-election', $election)) {
+            abort(403);
+        }
+
+        $candidate->delete();
+        return redirect(route('elections.edit', ['election' => $election->id]));
     }
 }
