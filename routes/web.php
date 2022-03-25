@@ -2,9 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ElectionController;
+use App\Http\Controllers\VoteController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\result_handler;
 use App\Models\Election;
+use App\Models\Vote;
+use ArielMejiaDev\LarapexCharts\LarapexChart;
 use RealRashid\SweetAlert\Facades\Alert;
 
 use function PHPUnit\Framework\fileExists;
@@ -37,9 +40,42 @@ Route::get('/votingscreen', function () {
     return view('votingscreen');
 })->name('votingscreen');
 
+// Below are the Route created for CustomizedElection ================================
 Route::get('/customizedElection', function () {
-    return view('customizedElection');
+    $votes = Vote::all();
+    $arrLen = count($votes);
+    $arrID = array(); 
+    for($x=0; $x<sizeof($votes);$x++)
+        array_push($arrID,$votes[$x]['id']);
+    $arrVotes = array(); 
+    for($x=0; $x<sizeof($votes);$x++)
+        array_push($arrVotes,(int)$votes[$x]['data']);
+    $sum = array_sum($arrVotes);
+    $arrVotesPercent = array(); 
+    for($x=0; $x<sizeof($votes);$x++)
+        array_push($arrVotesPercent,(double)number_format((double)$votes[$x]['data']/$sum * 100, 2, '.', ''));
+
+    $chart = (new LarapexChart)->pieChart()
+                    ->setTitle('Pie Chart(%)')
+                    ->setDataset($arrVotesPercent)
+                    ->setLabels($arrID);
+
+    $chart2 = (new LarapexChart)->horizontalBarChart()
+                    ->setTitle('Horizontal Bar Chart(Number of votes)')
+                    ->setColors(['#008FFB'])
+                    ->setDataset([
+                        [
+                            'name'  =>  'Votes(Number of votes)',
+                            'data'  =>  $arrVotes
+                        ]
+                    ])
+                    ->setXAxis($arrID);
+    
+    return view('customizedElection', compact('chart', 'chart2', 'votes'));
 })->middleware(['auth'])->name('customizedElection');
+Route::get('deleteVote/{id}', [VoteController::class,'delete']);
+Route::post('editData/', [VoteController::class,'editData']);
+Route::post('createData/', [VoteController::class,'createData']);
 
 // Below are the Route created for Dashboard ================================
 Route::get('delete/{id}', [UserController::class,'delete']);

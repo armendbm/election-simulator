@@ -15,6 +15,9 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
         <script src="{{ asset('js/app.js') }}" defer></script>
 
+        
+        {{-- <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet"> --}}
+
         <title>{{ config('app.name', 'Elections To Go') }}</title>
     </head>
     <body class="d-flex flex-column h-100">

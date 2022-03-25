@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Crypt;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Http\Request;
 use App\Models\User;
-use SweetAlert;
 
 
 class UserController extends Controller
