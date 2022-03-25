@@ -29,15 +29,16 @@
                                         Edit
                                     </button>
                                     @if (count($votes) > 1)
-                                    <button onclick="deleteClick()" class="btn-sm ml-4 btn-danger">
-                                        Delete
-                                    </button>
-                                     @endif
+                                        <button onclick="deleteClick()" class="btn-sm ml-4 btn-danger">
+                                            Delete
+                                        </button>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
+                
                 <div class="float-left mt-4 ">
                     <button type="button" class="btn-sm mx-2 mb-2 btn-primary" data-bs-toggle="modal" data-bs-target="#createmodal">
                         Create new data
@@ -166,7 +167,7 @@
         }
     </script>
 
-    {{-- Below are the codes for creatign the pie and bar charts --}}
+    {{-- Below are the codes for creating the pie and bar charts --}}
     <script src="{{ $chart->cdn() }}"></script>
     {{ $chart->script() }}
     <script src="{{ $chart2->cdn() }}"></script>

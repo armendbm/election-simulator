@@ -89,11 +89,8 @@ Route::post('createData/', [VoteController::class,'createData']);
 
 // Below are the Route created for Dashboard ================================
 Route::get('delete/{id}', [UserController::class,'delete']);
-Route::get('updateUserName/{id}', [UserController::class,'updateUserName']);
 Route::post('editUserName/', [UserController::class,'editUserName']);
-Route::get('updatePassword/{id}', [UserController::class,'updatePassword']);
 Route::post('editPassword/', [UserController::class,'editPassword']);
-Route::get('updateEmail/{id}', [UserController::class,'updateEmail']);
 Route::post('editEmail/', [UserController::class,'editEmail']);
 
 Route::resource('elections', ElectionController::class);

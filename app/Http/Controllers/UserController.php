@@ -19,40 +19,8 @@ class UserController extends Controller
         return redirect('/');
     }
 
-    function updateUserName($id){
-        $data = User::find($id);
-        return view('updateUserName', ['data' => $data]);
-    }
-
-    function updatePassword($id){
-        $data = User::find($id);
-        // $data->password = Crypt::decrypt($data->password); 
-        return view('updatePassword', ['data' => $data]);
-    }
-
-    function updateEmail($id){
-        $data = User::find($id);
-        return view('updateEmail', ['data' => $data]);
-    }
-
     function editUserName(Request $req){
         $this->validate($req, [  'name' => 'required|unique:users'  ]);
-        // $data = User::find($req->id);
-        // return $req->input();
-
-        // $user->find($req->id);
-        // return $user;
-        // $this->validate($req, [
-        //     'name'=> 'required',
-        //     'email'=> 'required',
-        //     'password'=> 'required' 
-        // ]);
-
-        // $user->update([
-        //     'name' => $req->name,
-        //     'email' => $req->email,
-        //     'password' => $req->password
-        // ]);
         $data = User::find($req->id);
         $data->name = $req->name;
         $data -> save();
@@ -74,7 +42,6 @@ class UserController extends Controller
             Alert::error('Fail', 'Two passwords did not match');
             return redirect('/dashboard');
         }
-        
     }
 
     function editEmail(Request $req){
