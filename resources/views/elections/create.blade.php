@@ -41,14 +41,14 @@
                     </div>
                     <div class="mb-3">
                         <label for="start_at" class="form-label">Start Date</label>
-                        <input type="date" name="start_at" id="start_at" class="form-control" required>
+                        <input type="datetime-local" name="start_at" id="start_at" class="form-control" required>
                         <div class="invalid-feedback">
                             Please choose a date.
                         </div>
                     </div>
                     <div class="mb-3">
                         <label for="end_at" class="form-label">End Date</label>
-                        <input type="date" name="end_at" id="end_at" class="form-control" required>
+                        <input type="datetime-local" name="end_at" id="end_at" class="form-control" required>
                         <div class="invalid-feedback">
                             Please choose a date.
                         </div>
