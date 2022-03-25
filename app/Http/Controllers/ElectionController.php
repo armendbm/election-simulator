@@ -50,7 +50,7 @@ class ElectionController extends Controller
         $election->end_at = $request->end_at;
         $request->user()->own_elections()->save($election);
 
-        return redirect(route('elections.edit', ['election' => $election]));
+        return redirect(route('elections.edit', ['election' => $election->id]));
     }
 
     /**

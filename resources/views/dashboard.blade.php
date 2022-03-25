@@ -41,12 +41,26 @@
                             @foreach (Auth::user()->own_elections()->get() as $election)
                                 <li class="list-group-item">
                                     {{ $election->name }} {{ $election->description }} {{ $election->system->value }} {{ $election->public }} {{ $election->anonymous }} {{ $election->start_at }} {{ $election->end_at }}
+                                    @foreach ($election->candidates()->get() as $candidate)
+                                        {{ $candidate->name }} ({{ count($election->votes()->where('data', $candidate->id)->get()) }})
+                                    @endforeach
                                     <a href="{{ route('elections.edit', ['election' => $election->id]) }}" class="btn btn-primary">Edit</a>
                                     <form method="POST" action="{{ route('elections.destroy', ['election' => $election->id]) }}">
                                         @method('delete')
                                         @csrf
                                         <button type="submit" class="btn btn-danger">Delete</button>
                                     </form>
+                                </li>
+                            @endforeach
+                        </ul>
+                    @endif
+                    @if (count($elections->where('public', 1)) > 0)
+                        <h3>Public Elections</h3>
+                        <ul class="list-group list-group-flush">
+                            @foreach ($elections->where('public', 1) as $election)
+                                <li class="list-group-item">
+                                    {{ $election->name }} {{ $election->description }}
+                                    <a href="{{ route('elections.votes.create', ['election' => $election->id]) }}" class="btn btn-primary">Vote</a>
                                 </li>
                             @endforeach
                         </ul>
