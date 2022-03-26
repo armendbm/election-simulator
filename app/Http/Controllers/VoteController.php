@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+
 use App\Http\Requests\StoreVoteRequest;
 use App\Http\Requests\UpdateVoteRequest;
+use App\Models\Election;
 use App\Models\Vote;
 
 class VoteController extends Controller
@@ -23,9 +26,9 @@ class VoteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Election $election)
     {
-        //
+        return view('elections.vote', ['election' => $election]);
     }
 
     /**
@@ -34,9 +37,14 @@ class VoteController extends Controller
      * @param  \App\Http\Requests\StoreVoteRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreVoteRequest $request)
+    /* public function store(StoreVoteRequest $request) */
+    public function store(Request $request, Election $election)
     {
-        //
+        $vote = new Vote;
+        $vote->data = $request->vote;
+        $vote->user_id = $request->user()->id;
+        $election->votes()->save($vote);
+        return redirect(route('dashboard'));
     }
 
     /**
