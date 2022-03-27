@@ -82,8 +82,7 @@
                                             <tr>
                                                 <td style="padding-left: 0.5rem;" colspan="5">
                                                     <strong>Candidates</strong>:
-                                                    {{ count($election->candidates()->get()) ? "" : "None" }}
-                                                    @foreach ($election->candidates()->get() as $candidate)
+                                                    {{ count($election->candidates()->get()) ? "" : "None" }}                                                    @foreach ($election->candidates()->get() as $candidate)
                                                         {{ $candidate->name }} ({{ count($election->votes()->where('data', $candidate->id)->get()) }})
                                                     @endforeach
                                                 </td>

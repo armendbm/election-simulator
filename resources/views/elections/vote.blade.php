@@ -13,10 +13,10 @@
                     <!--Voting interface changes based on $election->system->value-->
                     @switch($election->system->value) 
                         @case("irv") <!--Instant Runoff-->
-                            @foreach ($election->candidates()->get() as $candidate)
+                            @foreach ($election->candidates()->get() as $index=>$candidate)
                                 <div class="mb-3">
-                                    <label for="vote" class="form-label">Rank your Candidates</label>
-                                    <select name="vote" id="vote" class="form-select" aria-label="Vote" required>
+                                    <label for={{"vote" . $index }} class="form-label">{{"Candidate Choice #" . $index + 1}}</label>
+                                    <select name={{"vote" . $index }}  id={{"vote" . $index }} class="form-select" aria-label="Vote" required>
                                         <option selected disabled value="">TESTS...</option>
                                         @foreach ($election->candidates()->get() as $candidate)
                                             <option value="{{ $candidate->id }}">{{ $candidate->name }}</option>
@@ -30,8 +30,8 @@
                             @break
                         @default <!--First Past The Post-->
                             <div class="mb-3">
-                                <label for="vote" class="form-label">Vote</label>
-                                <select name="vote" id="vote" class="form-select" aria-label="Vote" required>
+                                <label for="vote0" class="form-label">Vote</label>
+                                <select name="vote0" id="vote0" class="form-select" aria-label="Vote" required>
                                     <option selected disabled value="">Choose...</option>
                                     @foreach ($election->candidates()->get() as $candidate)
                                         <option value="{{ $candidate->id }}">{{ $candidate->name }}</option>
@@ -44,6 +44,7 @@
                     @endswitch
                     <button type="submit" class="btn btn-primary mb-3">Vote</button>
                 </form>
+                <!-- May or may not even do anything found it online I'm learning -->
                 <?php
                     if(isset($_POST['submit'])){
                     if(!empty($_POST['radio'])) {
