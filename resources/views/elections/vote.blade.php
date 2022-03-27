@@ -14,29 +14,29 @@
                     @switch($election->system->value) 
                         @case("irv") <!--Instant Runoff-->
                             @foreach ($election->candidates()->get() as $candidate)
-                            <div class="mb-3">
-                                <!-- <label for="vote" class="form-label">Rank Your Candidates</label> -->
-                                @foreach ($election->candidates()->get() as $candidate)
-                                    <div style="padding: 1.5rem;">
-                                        <input type="radio" name="candidate" id="{{ $candidate->id }}" value="{{ $candidate->id }}" />
-                                        <label for="{{ $candidate->id }}">{{ $candidate->name }}</label><br>
+                                <div class="mb-3">
+                                    <label for="vote" class="form-label">Rank your Candidates</label>
+                                    <select name="vote" id="vote" class="form-select" aria-label="Vote" required>
+                                        <option selected disabled value="">TESTS...</option>
+                                        @foreach ($election->candidates()->get() as $candidate)
+                                            <option value="{{ $candidate->id }}">{{ $candidate->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Please choose a candidate.
                                     </div>
-                                @endforeach
-                                <div class="invalid-feedback">
-                                    Please choose a candidate.
                                 </div>
-                            </div>
                             @endforeach
                             @break
                         @default <!--First Past The Post-->
                             <div class="mb-3">
-                                <!-- <label for="vote" class="form-label">Rank Your Candidates</label> -->
-                                @foreach ($election->candidates()->get() as $candidate)
-                                    <div style="padding: 1.5rem;">
-                                        <input type="radio" name="candidate" id="{{ $candidate->id }}" value="{{ $candidate->id }}" />
-                                        <label for="{{ $candidate->id }}">{{ $candidate->name }}</label><br>
-                                    </div>
-                                @endforeach
+                                <label for="vote" class="form-label">Vote</label>
+                                <select name="vote" id="vote" class="form-select" aria-label="Vote" required>
+                                    <option selected disabled value="">Choose...</option>
+                                    @foreach ($election->candidates()->get() as $candidate)
+                                        <option value="{{ $candidate->id }}">{{ $candidate->name }}</option>
+                                    @endforeach
+                                </select>
                                 <div class="invalid-feedback">
                                     Please choose a candidate.
                                 </div>
@@ -44,6 +44,15 @@
                     @endswitch
                     <button type="submit" class="btn btn-primary mb-3">Vote</button>
                 </form>
+                <?php
+                    if(isset($_POST['submit'])){
+                    if(!empty($_POST['radio'])) {
+                        echo '  ' . $_POST['radio'];
+                    } else {
+                        echo 'Please select the value.';
+                    }
+                    }
+                ?>
             </div>
         </div>
     </div>

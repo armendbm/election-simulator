@@ -41,7 +41,7 @@ class VoteController extends Controller
     public function store(Request $request, Election $election)
     {
         $vote = new Vote;
-        $vote->data[] = $request->vote;
+        $vote->data = $request->vote;
         $vote->user_id = $request->user()->id;
         $election->votes()->save($vote);
         return redirect(route('dashboard'));
