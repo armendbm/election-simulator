@@ -9,6 +9,9 @@ use App\Http\Requests\StoreElectionRequest;
 use App\Http\Requests\UpdateElectionRequest;
 use App\Models\Election;
 
+use ArielMejiaDev\LarapexCharts\LarapexChart;
+use RealRashid\SweetAlert\Facades\Alert;
+
 class ElectionController extends Controller
 {
     /**
@@ -61,7 +64,48 @@ class ElectionController extends Controller
      */
     public function show(Election $election)
     {
-        //
+        if (! Gate::allows('edit-election', $election)) {
+            abort(403);
+        }
+
+        $arrName = array();
+        $arrVotes = array();
+        foreach ($election->candidates()->get() as $candidate) {
+            array_push($arrName, $candidate->name);
+            array_push($arrVotes, count($election->votes()->where('data', $candidate->id)->get()));
+        }
+        $sum = array_sum($arrVotes);
+        // $arrVotesPercent = array();
+        // for($x = 0; $x < count($arrVotes); $x++)
+        //     if (!$sum) {
+        //         array_push($arrVotesPercent, 0, 1, '.', '');
+        //     }
+        //     else {
+        //         array_push($arrVotesPercent, (double)number_format((double)$arrVotes[$x]/$sum * 100, 2, '.', ''));
+        //     }
+
+        $pie = (new LarapexChart)->pieChart()
+                        ->setTitle('Proportion of Votes')
+                        ->setDataset($arrVotes)
+                        ->setFontFamily('Calibri')
+                        // ->setColors(['#000000', '#333333', '#666666', '#999999', '#CCCCCC', '#FFFFFF',])
+                        ->setLabels($arrName);
+
+        $barChart = (new LarapexChart)->horizontalBarChart()
+                        ->setTitle('Number of Votes')
+                        ->setColors(['#008FFB'])
+                        ->setDataset([
+                            [
+                                'name'  =>  'Votes',
+                                'data'  =>  $arrVotes
+                            ]
+                        ])
+                        ->setFontFamily('Calibri')
+                        ->setMarkers(['#FF5722', '#E040FB'], 7, 10)
+                        // ->setGrid(false, '#3F51B5', 0.1)
+                        ->setXAxis($arrName);
+
+        return view('elections.show', compact('election', 'pie', 'barChart', 'arrName', 'arrVotes'));
     }
 
     /**

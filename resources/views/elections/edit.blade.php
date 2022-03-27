@@ -36,7 +36,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="description2" class="form-label">Description</label>
-                                <textarea name="description" id="description2" class="form-control" placeholder="Description goes here" rows="3" value="{{ $election->description }}"></textarea>
+                                <textarea name="description" id="description2" class="form-control" placeholder="Instructor of SD&D" rows="3" value="{{ $election->description }}"></textarea>
                             </div>
                             <button type="submit" class="btn btn-primary mb-3">Add candidate</button>
                         </form>
@@ -46,7 +46,7 @@
                     @method('put')
                     @csrf
                     <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
+                        <label for="name" class="form-label">Election Name</label>
                         <input type="text" name="name" id="name" class="form-control" placeholder="My Amazing Election" value="{{ $election->name }}" required>
                         <div class="invalid-feedback">
                             Please enter a name.
@@ -54,7 +54,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="description" class="form-label">Description</label>
-                        <textarea name="description" id="description" class="form-control" placeholder="Description goes here" rows="3" value="{{ $election->description }}"></textarea>
+                        <textarea name="description" id="description" class="form-control" placeholder="My amazing election's amazing description" rows="3" value="{{ $election->description }}"></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="system" class="form-label">System</label>
