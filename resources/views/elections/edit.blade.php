@@ -60,6 +60,7 @@
                         <label for="system" class="form-label">System</label>
                         <select name="system" id="system" class="form-select" aria-label="System" required>
                             <option selected value="fptp">FPTP</option>
+                            <option selected value="irv">IRV</option>
                         </select>
                         <div class="invalid-feedback">
                             Please select a system.

@@ -24,6 +24,7 @@
                         <select name="system" id="system" class="form-select" aria-label="System" required>
                             <option selected disabled value="">Choose...</option>
                             <option value="fptp">FPTP</option>
+                            <option value="irv">IRV</option>
                         </select>
                         <div class="invalid-feedback">
                             Please select a system.
