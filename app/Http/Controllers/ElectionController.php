@@ -75,27 +75,37 @@ class ElectionController extends Controller
             array_push($arrVotes, count($election->votes()->where('data', $candidate->id)->get()));
         }
         $sum = array_sum($arrVotes);
-        $arrVotesPercent = array();
-        for($x=0; $x<count($arrVotes);$x++)
-            array_push($arrVotesPercent,(double)number_format((double)$arrVotes[$x]/$sum * 100, 2, '.', ''));
+        // $arrVotesPercent = array();
+        // for($x = 0; $x < count($arrVotes); $x++)
+        //     if (!$sum) {
+        //         array_push($arrVotesPercent, 0, 1, '.', '');
+        //     }
+        //     else {
+        //         array_push($arrVotesPercent, (double)number_format((double)$arrVotes[$x]/$sum * 100, 2, '.', ''));
+        //     }
 
-        $chart = (new LarapexChart)->pieChart()
-                        ->setTitle('Pie Chart(%)')
-                        ->setDataset($arrVotesPercent)
+        $pie = (new LarapexChart)->pieChart()
+                        ->setTitle('Proportion of Votes')
+                        ->setDataset($arrVotes)
+                        ->setFontFamily('Calibri')
+                        // ->setColors(['#000000', '#333333', '#666666', '#999999', '#CCCCCC', '#FFFFFF',])
                         ->setLabels($arrName);
 
-        $chart2 = (new LarapexChart)->horizontalBarChart()
-                        ->setTitle('Horizontal Bar Chart(Number of votes)')
+        $barChart = (new LarapexChart)->horizontalBarChart()
+                        ->setTitle('Number of Votes')
                         ->setColors(['#008FFB'])
                         ->setDataset([
                             [
-                                'name'  =>  'Votes(Number of votes)',
+                                'name'  =>  'Votes',
                                 'data'  =>  $arrVotes
                             ]
                         ])
+                        ->setFontFamily('Calibri')
+                        ->setMarkers(['#FF5722', '#E040FB'], 7, 10)
+                        // ->setGrid(false, '#3F51B5', 0.1)
                         ->setXAxis($arrName);
 
-        return view('elections.show', compact('election', 'chart', 'chart2', 'arrName', 'arrVotes'));
+        return view('elections.show', compact('election', 'pie', 'barChart', 'arrName', 'arrVotes'));
     }
 
     /**

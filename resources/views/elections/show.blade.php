@@ -1,4 +1,5 @@
 <x-app-layout>
+    <br>
     <h2>
         Election Results: {{ $election->name }}
     </h2>
@@ -6,15 +7,15 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="bg-white border-b border-gray-200">
+                <!-- <div class="bg-white border-b border-gray-200">
                     <p class="ml-3 my-3 h5"><strong>Results</strong></p>
-                </div>
+                </div> -->
                 
                 <table class="table table-striped table-hover table-reflow">
                     <thead>
                         <tr>
-                            <th ><strong> Name: </strong></th>
-                            <th ><strong> Votes: </strong></th>
+                            <th><strong> Name: </strong></th>
+                            <th><strong> Votes: </strong></th>
                         </tr>
                     </thead>
 
@@ -27,29 +28,37 @@
                         @endfor
                     </tbody>
                 </table>
-            </div> 
-        </div>
-    </div>
-
-    {{-- Where the charts are created --}}
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="row no-gutters aw-main-wrapper">
-                <p class="ml-3 my-3 h5"><strong>Results</strong></p>
-                <div class="col-lg-6">
-                    {!! $chart2 -> container() !!}
-                </div>
-                <div class="col-lg-6">
-                    {!! $chart -> container() !!}
+                <div class="row no-gutters aw-main-wrapper">
+                    <!-- <p class="ml-3 my-3 h5"><strong>Results</strong></p> -->
+                    <div class="col-lg-6">
+                        {!! $barChart -> container() !!}
+                    </div>
+                    <div class="col-lg-6">
+                        {!! $pie -> container() !!}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- {{-- Where the charts are created --}}
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="row no-gutters aw-main-wrapper">
+                <div class="col-lg-6">
+                    {!! $barChart -> container() !!}
+                </div>
+                <div class="col-lg-6">
+                    {!! $pie -> container() !!}
+                </div>
+            </div>
+        </div>
+    </div> -->
+
     {{-- Below are the codes for creating the pie and bar charts --}}
-    <script src="{{ $chart->cdn() }}"></script>
-    {{ $chart->script() }}
-    <script src="{{ $chart2->cdn() }}"></script>
-    {{ $chart2->script() }}
+    <script src="{{ $pie->cdn() }}"></script>
+    {{ $pie->script() }}
+    <script src="{{ $barChart->cdn() }}"></script>
+    {{ $barChart->script() }}
     
 </x-app-layout>
