@@ -12,7 +12,7 @@
                         <p class="ml-3 my-3 h5"><strong>{{ auth()->user()->name }}'s Information</strong></p>
                     </div>
                     <div class="p-6 bg-white ">
-                        User Id: {{ auth()->user()->id }}
+                        User ID: {{ auth()->user()->id }}
                     </div>
                     <div class="p-6 bg-white ">
                         Username: {{ auth()->user()->name }}  <a class="ml-2 link-primary" data-bs-toggle="modal" data-bs-target="#editUsernameModal" href=""><i class="bi bi-vector-pen"></i>edit</a>
@@ -41,12 +41,58 @@
                         <ul class="list-group list-group-flush">
                             @foreach (Auth::user()->own_elections()->get() as $election)
                                 <li class="list-group-item">
-                                    {{ $election->name }} {{ $election->description }} {{ $election->system->value }} {{ $election->public }} {{ $election->anonymous }} {{ $election->start_at }} {{ $election->end_at }}
-                                    @foreach ($election->candidates()->get() as $candidate)
+                                    <!-- {{ $election->name }}<br>
+                                    {{ $election->description }}<br>
+                                    {{ $election->system->value }}<br>
+                                    {{ $election->public }}<br>
+                                    {{ $election->anonymous }}<br>
+                                    {{ $election->start_at }}<br>
+                                    {{ $election->end_at }}<br> -->
+                                    <!-- @foreach ($election->candidates()->get() as $candidate)
                                         {{ $candidate->name }} ({{ count($election->votes()->where('data', $candidate->id)->get()) }})
-                                    @endforeach
+                                    @endforeach -->
+                                    <table style="border: 1px solid grey; margin: 1rem 1rem 1rem 0;" class="election-table" width="100%">
+                                        <thead>
+                                            <tr style="border-bottom: 1px dashed grey;">
+                                                <td style="padding-left: 0.5rem;" colspan="5">
+                                                    <strong>{{ $election->name }}</strong>
+                                                </td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr style="border-bottom: 1px dashed grey;">
+                                                <td style="padding-left: 0.5rem;" colspan="5">
+                                                    <strong>Description</strong>: {{ $election->description ?? "No description"}}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align:center" width="1rem"><strong>Type</strong></td>
+                                                <td style="text-align:center" width="1rem"><strong>Visibility</strong></td>
+                                                <td style="text-align:center" width="1rem"><strong>Anonymity</strong></td>
+                                                <td style="text-align:center" width="1rem"><strong>Started at</strong></td>
+                                                <td style="text-align:center" width="1rem"><strong>Ended at</strong></td>
+                                            </tr>
+                                            <tr style="border-bottom: 1px dashed grey;">
+                                                <td style="text-align:center" width="1rem">{{ strtoupper($election->system->value) }}</td>
+                                                <td style="text-align:center" width="1rem">{{ $election->public ? "Public" : "Private"}}</td>
+                                                <td style="text-align:center" width="1rem">{{ $election->anonymous ? "Anonymous" : "Not anonymous" }}</td>
+                                                <td style="text-align:center" width="1rem">{{ $election->start_at }}</td>
+                                                <td style="text-align:center" width="1rem">{{ $election->end_at }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left: 0.5rem;" colspan="5">
+                                                    <strong>Candidates</strong>:
+                                                    {{ count($election->candidates()->get()) ? "" : "None" }}
+                                                    @foreach ($election->candidates()->get() as $candidate)
+                                                        {{ $candidate->name }} ({{ count($election->votes()->where('data', $candidate->id)->get()) }})
+                                                    @endforeach
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                     <a href="{{ route('elections.edit', ['election' => $election->id]) }}" class="btn btn-primary">Edit</a>
                                     <a href="{{ route('elections.show', ['election' => $election->id]) }}" class="btn btn-primary">View Results</a>
+                                    <br><br>
                                     <form method="POST" action="{{ route('elections.destroy', ['election' => $election->id]) }}">
                                         @method('delete')
                                         @csrf
