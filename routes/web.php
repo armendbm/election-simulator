@@ -3,11 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\ElectionController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\VoteController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\result_handler;
 use App\Models\Election;
-use RealRashid\SweetAlert\Facades\Alert;
 
 use function PHPUnit\Framework\fileExists;
 
@@ -39,13 +38,14 @@ Route::get('/votingscreen', function () {
     return view('votingscreen');
 })->name('votingscreen');
 
+// Below are the Route created for CustomizedElection ================================
+Route::get('/customizedElection', function () {
+})->middleware(['auth'])->name('customizedElection');
+
 // Below are the Route created for Dashboard ================================
 Route::get('delete/{id}', [UserController::class,'delete']);
-Route::get('updateUserName/{id}', [UserController::class,'updateUserName']);
 Route::post('editUserName/', [UserController::class,'editUserName']);
-Route::get('updatePassword/{id}', [UserController::class,'updatePassword']);
 Route::post('editPassword/', [UserController::class,'editPassword']);
-Route::get('updateEmail/{id}', [UserController::class,'updateEmail']);
 Route::post('editEmail/', [UserController::class,'editEmail']);
 
 Route::resource('elections', ElectionController::class)->middleware('auth');

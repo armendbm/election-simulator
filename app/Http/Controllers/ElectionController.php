@@ -9,6 +9,9 @@ use App\Http\Requests\StoreElectionRequest;
 use App\Http\Requests\UpdateElectionRequest;
 use App\Models\Election;
 
+use ArielMejiaDev\LarapexCharts\LarapexChart;
+use RealRashid\SweetAlert\Facades\Alert;
+
 class ElectionController extends Controller
 {
     /**
@@ -61,7 +64,38 @@ class ElectionController extends Controller
      */
     public function show(Election $election)
     {
-        //
+        if (! Gate::allows('edit-election', $election)) {
+            abort(403);
+        }
+
+        $arrName = array();
+        $arrVotes = array();
+        foreach ($election->candidates()->get() as $candidate) {
+            array_push($arrName, $candidate->name);
+            array_push($arrVotes, count($election->votes()->where('data', $candidate->id)->get()));
+        }
+        $sum = array_sum($arrVotes);
+        $arrVotesPercent = array();
+        for($x=0; $x<count($arrVotes);$x++)
+            array_push($arrVotesPercent,(double)number_format((double)$arrVotes[$x]/$sum * 100, 2, '.', ''));
+
+        $chart = (new LarapexChart)->pieChart()
+                        ->setTitle('Pie Chart(%)')
+                        ->setDataset($arrVotesPercent)
+                        ->setLabels($arrName);
+
+        $chart2 = (new LarapexChart)->horizontalBarChart()
+                        ->setTitle('Horizontal Bar Chart(Number of votes)')
+                        ->setColors(['#008FFB'])
+                        ->setDataset([
+                            [
+                                'name'  =>  'Votes(Number of votes)',
+                                'data'  =>  $arrVotes
+                            ]
+                        ])
+                        ->setXAxis($arrName);
+
+        return view('elections.show', compact('election', 'chart', 'chart2', 'arrName', 'arrVotes'));
     }
 
     /**
