@@ -7,9 +7,17 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <!-- <div class="bg-white border-b border-gray-200">
-                    <p class="ml-3 my-3 h5"><strong>Results</strong></p>
-                </div> -->
+                <div>
+                    Winner:
+                    @if (count($winners) == 1)
+                        {{ $winners[0] }}
+                    @else
+                        Tie between {{ $winners[0] }}
+                        @for ($x = 1; $x < count($winners); $x++)
+                        , {{ $winners[$x] }}
+                        @endfor
+                    @endif
+                </div>
                 
                 <table class="table table-striped table-hover table-reflow">
                     <thead>

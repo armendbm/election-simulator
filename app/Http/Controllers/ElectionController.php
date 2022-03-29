@@ -83,6 +83,13 @@ class ElectionController extends Controller
         //     else {
         //         array_push($arrVotesPercent, (double)number_format((double)$arrVotes[$x]/$sum * 100, 2, '.', ''));
         //     }
+        $maxVotes = max($arrVotes);
+        $winners = array();
+        for ($x = 0; $x < count($arrName); $x++) {
+            if ($arrVotes[$x] == $maxVotes) {
+                array_push($winners, $arrName[$x]);
+            }
+        }
 
         $pie = (new LarapexChart)->pieChart()
                         ->setTitle('Proportion of Votes')
@@ -105,7 +112,7 @@ class ElectionController extends Controller
                         // ->setGrid(false, '#3F51B5', 0.1)
                         ->setXAxis($arrName);
 
-        return view('elections.show', compact('election', 'pie', 'barChart', 'arrName', 'arrVotes'));
+        return view('elections.show', compact('election', 'pie', 'barChart', 'arrName', 'arrVotes', 'winners'));
     }
 
     /**
