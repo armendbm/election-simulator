@@ -88,7 +88,7 @@ class ElectionController extends Controller
                         ->setTitle('Proportion of Votes')
                         ->setDataset($arrVotes)
                         ->setFontFamily('Calibri')
-                        // ->setColors(['#000000', '#333333', '#666666', '#999999', '#CCCCCC', '#FFFFFF',])
+                        ->setColors(['#886eaa', '#e690ba', '#ebc0e4', '#fee9ea', '#ffcfb3', '#aef6f7','2f9fb3'])
                         ->setLabels($arrName);
 
         $barChart = (new LarapexChart)->horizontalBarChart()
@@ -101,9 +101,11 @@ class ElectionController extends Controller
                             ]
                         ])
                         ->setFontFamily('Calibri')
+                        ->setColors(['#aaaab5'])
                         ->setMarkers(['#FF5722', '#E040FB'], 7, 10)
                         // ->setGrid(false, '#3F51B5', 0.1)
                         ->setXAxis($arrName);
+
 
         return view('elections.show', compact('election', 'pie', 'barChart', 'arrName', 'arrVotes'));
     }
