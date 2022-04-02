@@ -96,9 +96,9 @@ class ElectionController extends Controller
                 fwrite($myfile, $threshold); //threshold
 
                 fwrite($myfile, "  },\n");
-                
                 //------------RESULTS--------------
                 fwrite($myfile, "  \"results\" : [ {\n");
+                //$currCands = $election->candidates()->get()->toArray();
                 //for simplicity, # of rounds = # of candidates - 1
                 for ($elimdCands = 0; $elimdCands < $election->candidates()->count()-1; $elimdCands++){
                     $txt = "    \"round\" : " . $elimdCands + 1 . ".0,\n"; 
@@ -106,12 +106,14 @@ class ElectionController extends Controller
                     fwrite($myfile, "    \"tally\" : {\n"); //begin tally
                     $j = 0;
                     foreach($election->candidates()->get() as $candidate){
-                        if($j == $election->candidates()->count() - $elimdCands){break;}
-                        $tally = 5; //temp value, will need to calculate
+                        if($j == $election->candidates()->get()->count() - 1){break;}
+                        //calc tally
+                        $tally = 5.0;
+                        //"SELECT count(*) FROM votes WHERE election_id = 7 AND data LIKE '15:%'"; 
                         $lowest = 0;
                         $eliminated = "";
                         $txt = "      \"" . $candidate->name . "\" : " . $tally . ".0"; 
-                        $txt .= ($j == $election->candidates()->count() - $elimdCands  - 1) ? "\n" : ",\n";
+                        $txt .= ($j == count($election->candidates()->get()) - 1) ? "\n" : ",\n";
                         fwrite($myfile, $txt); //candidate tally
                         $j++;
                     }
@@ -122,18 +124,20 @@ class ElectionController extends Controller
                     fwrite($myfile, $txt); //elimanated
                     $txt = "      \"transfers\" : {\n"; //begin transfers
                         foreach($election->candidates()->get() as $candidate){
-                            if($j == $election->candidates()->count() - $elimdCands){break;}
+                            if($j == $election->candidates()->get()->count()) {break;}
                             $tally = 5; //temp value, will need to calculate
                             $lowest = 0;
                             $eliminated = "";
                             $txt = "      \"" . $candidate->name . "\" : " . $tally . ".0"; 
-                            $txt .= ($j == $election->candidates()->count() - $elimdCands  - 1) ? "\n" : ",\n";
+                            $txt .= ($j == $election->candidates()->get()->count()  - 1) ? "\n" : ",\n";
                             fwrite($myfile, $txt); //candidate tally
                             $j++;
                         }
                     $txt = "      }\n"; //end transfers
                     fwrite($myfile, $txt); //elimanated
                     fwrite($myfile, "    } ]\n");
+                    //eliminate candidate (will break with duplicate names)
+                    //unset($currCands[array_search($eliminated, $currCands)]);
                 }
                 fwrite($myfile, "  },\n"); //end round
                 fwrite($myfile, "  ]\n");//end results

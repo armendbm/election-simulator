@@ -11,19 +11,20 @@
     "tally" : {
       "Candidate 1" : 5.0,
       "Candidate 2" : 5.0,
-      "Candidate 3" : 5.0
     },
     "tallyResults" : [ {
       "eliminated" : 
+      "Candidate 1" : 5.0
       }
     } ]
     "round" : 2.0,
     "tally" : {
       "Candidate 1" : 5.0,
-      "Candidate 2" : 5.0
+      "Candidate 2" : 5.0,
     },
     "tallyResults" : [ {
       "eliminated" : 
+      "Candidate 1" : 5.0
       }
     } ]
   },
