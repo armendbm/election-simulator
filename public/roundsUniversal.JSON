@@ -1,0 +1,31 @@
+{
+  "config" : {
+    "contest" : "Test IRV",
+    "date" : "2022-04-01",
+    "jurisdiction" : "Sample Data",
+    "office" : "Council",
+    "threshold" : 7
+  },
+  "results" : [ {
+    "round" : 1.0,
+    "tally" : {
+      "Candidate 1" : 5.0,
+      "Candidate 2" : 5.0,
+      "Candidate 3" : 5.0
+    },
+    "tallyResults" : [ {
+      "eliminated" : 
+      }
+    } ]
+    "round" : 2.0,
+    "tally" : {
+      "Candidate 1" : 5.0,
+      "Candidate 2" : 5.0
+    },
+    "tallyResults" : [ {
+      "eliminated" : 
+      }
+    } ]
+  },
+  ]
+}
