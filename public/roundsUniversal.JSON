@@ -9,7 +9,7 @@
   "results" : [ {
     "round" : 1.0,
     "tally" : {
-      "Candidate 1" : 7.0,
+      "Candidate 1" : 8.0,
       "Candidate 2" : 2.0,
       "Candidate 3" : 3.0
     },
@@ -24,8 +24,8 @@
   {
     "round" : 2.0,
     "tally" : {
-      "Candidate 1" : 7.0,
-      "Candidate 3" : 3.0
+      "Candidate 1" : 9.0,
+      "Candidate 3" : 4.0
     },
     "tallyResults" : [ {
       "elected" : "Candidate 1"
