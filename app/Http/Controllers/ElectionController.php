@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\DB;
 
 use App\Http\Requests\StoreElectionRequest;
 use App\Http\Requests\UpdateElectionRequest;
@@ -98,48 +99,65 @@ class ElectionController extends Controller
                 fwrite($myfile, "  },\n");
                 //------------RESULTS--------------
                 fwrite($myfile, "  \"results\" : [ {\n");
-                //$currCands = $election->candidates()->get()->toArray();
+                $currCands = $election->candidates()->get()->all();
                 //for simplicity, # of rounds = # of candidates - 1
                 for ($elimdCands = 0; $elimdCands < $election->candidates()->count()-1; $elimdCands++){
+                    if($elimdCands != 0){fwrite($myfile, "  {\n");}
                     $txt = "    \"round\" : " . $elimdCands + 1 . ".0,\n"; 
                     fwrite($myfile, $txt); //round number
                     fwrite($myfile, "    \"tally\" : {\n"); //begin tally
                     $j = 0;
-                    foreach($election->candidates()->get() as $candidate){
-                        if($j == $election->candidates()->get()->count() - 1){break;}
+                    $eliminated = "";
+                    $lowest = PHP_INT_MAX;
+                    //loop through remaining candidate votes
+                    foreach($currCands as $candidate){
+                        if($j == count($currCands)){break;}
                         //calc tally
-                        $tally = 5.0;
-                        //"SELECT count(*) FROM votes WHERE election_id = 7 AND data LIKE '15:%'"; 
-                        $lowest = 0;
-                        $eliminated = "";
-                        $txt = "      \"" . $candidate->name . "\" : " . $tally . ".0"; 
-                        $txt .= ($j == count($election->candidates()->get()) - 1) ? "\n" : ",\n";
+                        //THIS ONLY WORKS ON FIRST ROUND IT NEEDS TO BE REFINED
+                        //must count all data where candidate->id comes after any strings
+                        //that have already been elimanted.
+                        //can probably just use a regex or and keep appending or's to the front
+                        //so we can ignore them. itll make sense i swear
+                        //can prolly abstract into a function
+                        $tally = $election->votes()->where('data', 'like', $candidate->id . ':%')->count();
+                        
+                        //find lowest scoring (LOSER!)
+                        if ($tally < $lowest){
+                            $lowest = $tally;
+                            $eliminated = $candidate;
+                        }
+                        
+                        $txt = "      \"" . $candidate->name . "\" : " . $tally  . ".0"; 
+                        $txt .= ($j == count($currCands) - 1) ? "\n" : ",\n"; //no comma on last cand
                         fwrite($myfile, $txt); //candidate tally
                         $j++;
                     }
                     fwrite($myfile, "    },\n"); //end tally
 
-                    fwrite($myfile, "    \"tallyResults\" : [ {\n"); //begin tallyResults
-                    $txt = "      \"eliminated\" : " . $eliminated . "\n"; 
-                    fwrite($myfile, $txt); //elimanated
-                    $txt = "      \"transfers\" : {\n"; //begin transfers
-                        foreach($election->candidates()->get() as $candidate){
-                            if($j == $election->candidates()->get()->count()) {break;}
-                            $tally = 5; //temp value, will need to calculate
-                            $lowest = 0;
-                            $eliminated = "";
-                            $txt = "      \"" . $candidate->name . "\" : " . $tally . ".0"; 
-                            $txt .= ($j == $election->candidates()->get()->count()  - 1) ? "\n" : ",\n";
-                            fwrite($myfile, $txt); //candidate tally
-                            $j++;
-                        }
-                    $txt = "      }\n"; //end transfers
-                    fwrite($myfile, $txt); //elimanated
-                    fwrite($myfile, "    } ]\n");
                     //eliminate candidate (will break with duplicate names)
-                    //unset($currCands[array_search($eliminated, $currCands)]);
+                    unset($currCands[array_search($eliminated, $currCands)]);
+
+                    fwrite($myfile, "    \"tallyResults\" : [ {\n"); //begin tallyResults
+                    if($elimdCands == $election->candidates->count()-2){
+                        $txt = "      \"elected\" : \"" . $currCands[0]->name . "\"\n";
+                        fwrite($myfile, $txt);
+                    }else{
+                        $txt = "      \"eliminated\" : \"" . $eliminated->name . "\",\n"; 
+                        fwrite($myfile, $txt); //eliminated
+                        fwrite($myfile, "      \"transfers\" : {\n"); //begin transfers
+                            foreach($currCands as $key => $candidate){
+                                $transfer = $election->votes()->where('data', 'like', $eliminated->id . ':%:' . $candidate->id . ':%')->count();
+                                $txt = "        \"" . $candidate->name . "\" : " . $transfer . ".0";
+                                $txt .= ($key === array_key_last($currCands)) ? "\n" : ",\n"; //no comma on last cand
+                                fwrite($myfile, $txt); //candidate transfer
+                            }
+                        fwrite($myfile, "      }\n"); //end transfers
+                    }
+                    
+                    fwrite($myfile, "    } ]\n"); //end tallyResults
+                    $txt = ($elimdCands == $election->candidates()->count()-2) ? "  }\n" : "  },\n"; //no comma on last cand
+                    fwrite($myfile, $txt); //end round
                 }
-                fwrite($myfile, "  },\n"); //end round
                 fwrite($myfile, "  ]\n");//end results
                 fwrite($myfile, "}");//end file
                 fclose($myfile);
