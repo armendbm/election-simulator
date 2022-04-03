@@ -4,12 +4,12 @@
     "date" : "2022-04-01",
     "jurisdiction" : "Sample Data",
     "office" : "Council",
-    "threshold" : 7
+    "threshold" : 8
   },
   "results" : [ {
     "round" : 1.0,
     "tally" : {
-      "Candidate 1" : 8.0,
+      "Candidate 1" : 9.0,
       "Candidate 2" : 2.0,
       "Candidate 3" : 3.0
     },
@@ -24,7 +24,7 @@
   {
     "round" : 2.0,
     "tally" : {
-      "Candidate 1" : 9.0,
+      "Candidate 1" : 10.0,
       "Candidate 3" : 4.0
     },
     "tallyResults" : [ {
