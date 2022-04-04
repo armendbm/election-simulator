@@ -7,6 +7,7 @@ use App\Http\Controllers\VoteController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\result_handler;
 use App\Models\Election;
+use App\Models\User;
 
 use function PHPUnit\Framework\fileExists;
 
@@ -27,7 +28,7 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/dashboard', function () {
-    return view('dashboard', ['elections' => Election::all()]);
+    return view('dashboard', ['elections' => Election::all(), 'users' => User::all()]);
 })->middleware(['auth'])->name('dashboard');
 
 Route::get('/documentation', function () {

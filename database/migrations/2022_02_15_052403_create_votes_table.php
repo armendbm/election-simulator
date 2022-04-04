@@ -21,6 +21,7 @@ class CreateVotesTable extends Migration
             $table->foreignIdFor(User::class);
             $table->foreignIdFor(Election::class);
             $table->timestamps();
+            $table->string('date')->nullable();
         });
     }
 

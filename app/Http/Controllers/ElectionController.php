@@ -10,7 +10,12 @@ use App\Http\Requests\UpdateElectionRequest;
 use App\Models\Election;
 
 use ArielMejiaDev\LarapexCharts\LarapexChart;
+use DateInterval;
+use DatePeriod;
+use DateTime;
+use Illuminate\Support\Arr;
 use RealRashid\SweetAlert\Facades\Alert;
+use SebastianBergmann\CodeCoverage\CrapIndex;
 
 class ElectionController extends Controller
 {
@@ -106,8 +111,51 @@ class ElectionController extends Controller
                         // ->setGrid(false, '#3F51B5', 0.1)
                         ->setXAxis($arrName);
 
+        $s = new DateTime($election->start_at->format('Y-m-d'));
+        $i = new DateInterval('P1D');
+        $e = new DateTime($election->end_at->format('Y-m-d'));
+        $period = new DatePeriod($s, $i, $e);
+                
+        $arrDates = array();
+                
+        foreach ($period as $date) {
+            array_push($arrDates, $date->format('Y-m-d'));
+        }
 
-        return view('elections.show', compact('election', 'pie', 'barChart', 'arrName', 'arrVotes'));
+        $lineChart = (new LarapexChart)->lineChart()
+                        ->setTitle('Each day\'s number of votes')
+                        ->setFontFamily('Calibri')
+                        ->setColors(['#886eaa', '#e690ba', '#ebc0e4', '#fee9ea', '#ffcfb3', '#aef6f7','2f9fb3'])
+                        ->setXAxis($arrDates);
+        
+        $lineChart2 = (new LarapexChart)->lineChart()
+                        ->setTitle('Sum of votes')
+                        ->setFontFamily('Calibri')
+                        ->setColors(['#886eaa', '#e690ba', '#ebc0e4', '#fee9ea', '#ffcfb3', '#aef6f7','2f9fb3'])
+                        ->setXAxis($arrDates);
+
+        $arr2dvotes = array();
+        $arr2dsumvotes = array();
+        foreach ($election->candidates()->get() as $candidate) {
+            $temp = array();
+            $temp2 = array();
+            $num = 0;
+            foreach($arrDates as $date){
+                $count = count($election->votes()->where('data', $candidate->id)->where('date', $date)->get());
+                array_push($temp, $count);
+                $num += $count;
+                array_push($temp2, $num);
+            }
+            array_push($arr2dvotes, $temp);
+            array_push($arr2dsumvotes, $temp2);
+        }
+        // return $arr2dsumvotes;
+
+        for($x = 0; $x < count($arrVotes); $x++){
+            $lineChart->addData($arrName[$x], $arr2dvotes[$x]);
+            $lineChart2->addData($arrName[$x], $arr2dsumvotes[$x]);
+        }
+        return view('elections.show', compact('election', 'pie', 'barChart', 'arrName', 'arrVotes', 'lineChart', 'lineChart2'));
     }
 
     /**
