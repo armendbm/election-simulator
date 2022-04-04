@@ -19,5 +19,4 @@
             <h2>Version: Alpha 1.0</h2>
         </div>
     </div>
-
 </x-app-layout>

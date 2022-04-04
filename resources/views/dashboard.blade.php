@@ -109,6 +109,8 @@
                                 <li class="list-group-item">
                                     {{ $election->name }} {{ $election->description }}
                                     <a href="{{ route('elections.votes.create', ['election' => $election->id]) }}" class="btn btn-primary">Vote</a>
+                                    <a href="{{ route('elections.show', ['election' => $election->id]) }}" class="btn btn-primary">View Results</a>
+
                                 </li>
                             @endforeach
                         </ul>
