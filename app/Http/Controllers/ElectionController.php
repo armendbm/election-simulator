@@ -166,7 +166,7 @@ class ElectionController extends Controller
                 fwrite($myfile, "}");//end file
                 fclose($myfile);
                 
-                break;
+                //break;
             default: //First Past The post
 
                 $arrName = array();

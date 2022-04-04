@@ -1,35 +1,66 @@
 {
   "config" : {
-    "contest" : "Test IRV",
-    "date" : "2022-04-01",
+    "contest" : "Favorite Food",
+    "date" : "2022-04-03",
     "jurisdiction" : "Sample Data",
     "office" : "Council",
-    "threshold" : 8
+    "threshold" : 1
   },
   "results" : [ {
     "round" : 1.0,
     "tally" : {
-      "Candidate 1" : 9.0,
-      "Candidate 2" : 2.0,
-      "Candidate 3" : 3.0
+      "Chicken" : 0.0,
+      "Corn" : 0.0,
+      "Beans" : 0.0,
+      "Cake" : 0.0,
+      "Air" : 0.0
     },
     "tallyResults" : [ {
-      "eliminated" : "Candidate 2",
+      "eliminated" : "Chicken",
       "transfers" : {
-        "Candidate 1" : 1.0,
-        "Candidate 3" : 1.0
+        "Corn" : 0.0,
+        "Beans" : 0.0,
+        "Cake" : 0.0,
+        "Air" : 0.0
       }
     } ]
   },
   {
     "round" : 2.0,
     "tally" : {
-      "Candidate 1" : 10.0,
-      "Candidate 3" : 4.0
+      "Corn" : 0.0,
+      "Beans" : 0.0,
+      "Cake" : 0.0,
+      "Air" : 0.0
     },
     "tallyResults" : [ {
-      "elected" : "Candidate 1"
+      "eliminated" : "Corn",
+      "transfers" : {
+        "Beans" : 0.0,
+        "Cake" : 0.0,
+        "Air" : 0.0
+      }
     } ]
-  }
-  ]
-}
+  },
+  {
+    "round" : 3.0,
+    "tally" : {
+      "Beans" : 0.0,
+      "Cake" : 0.0,
+      "Air" : 0.0
+    },
+    "tallyResults" : [ {
+      "eliminated" : "Beans",
+      "transfers" : {
+        "Cake" : 0.0,
+        "Air" : 0.0
+      }
+    } ]
+  },
+  {
+    "round" : 4.0,
+    "tally" : {
+      "Cake" : 0.0,
+      "Air" : 0.0
+    },
+    "tallyResults" : [ {
