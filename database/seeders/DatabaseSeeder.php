@@ -41,6 +41,22 @@ class DatabaseSeeder extends Seeder
                 // Hash value of 'johnsturman'
                 'password' => '$2y$10$tpm76Q3kS6WkeHCvsJ0yJOV6ZGQmAre7FNCZfDP3UMw90sJhv7OK.',
             ]);
-        $users = User::factory()->count(100)->make();
+        // Create a bunch of users, and have them all vote in every public
+        // election.
+        $users = User::factory()->count(100)->create();
+        $elections = Election::all()->where('public', 1);
+        foreach ($users as $user) {
+            foreach ($elections as $election) {
+                Vote::factory()->for($user)->for($election)->state(
+                    function (array $attributes) use ($election) {
+                        switch ($election->system->value) {
+                            case 'irv':
+                                return ['data' => implode(':', $election->candidates()->pluck('id')->shuffle()->all())];
+                            default:
+                                return ['data' => $election->candidates()->pluck('id')->random()];
+                        }
+                    })->create();
+            }
+        }
     }
 }
