@@ -71,7 +71,6 @@ class ElectionController extends Controller
         }
         switch($election->system->value){
             case "irv": //Instant Runoff
-                //TODO: Put values in Universal tab JSON
                 //TODO: Run that file through a python script that
                 //      will send GET requests to the RCVis REST API
                 //TODO: embed the retrieved vis into the web page
@@ -99,7 +98,8 @@ class ElectionController extends Controller
                 fwrite($myfile, "  },\n");
                 //------------RESULTS--------------
                 fwrite($myfile, "  \"results\" : [ {\n");
-                $currCands = $election->candidates()->get()->all();
+                $currCands = $election->candidates()->get()->all(); //array of current candidates
+                $losers = array();
                 //for simplicity, # of rounds = # of candidates - 1
                 for ($elimdCands = 0; $elimdCands < $election->candidates()->count()-1; $elimdCands++){
                     if($elimdCands != 0){fwrite($myfile, "  {\n");}
@@ -113,13 +113,16 @@ class ElectionController extends Controller
                     foreach($currCands as $candidate){
                         if($j == count($currCands)){break;}
                         //calc tally
-                        //THIS ONLY WORKS ON FIRST ROUND IT NEEDS TO BE REFINED
                         //must count all data where candidate->id comes after any strings
-                        //that have already been elimanted.
-                        //can probably just use a regex or and keep appending or's to the front
-                        //so we can ignore them. itll make sense i swear
+                        //that have already been eliminated.
                         //can prolly abstract into a function
-                        $tally = $election->votes()->where('data', 'like', $candidate->id . ':%')->count();
+                        $regexp = "^(?:(?:"; //at the start of the ballot
+                        foreach($losers as $key => $loser){ //allow losers to precede
+                            $regexp .= $loser->id;
+                            if($key !== array_key_last($losers)){$regexp .= "|";}
+                        }
+                        $regexp .=")?:?){" . count($losers) . "}" . $candidate->id . ":.*";
+                        $tally = $election->votes()->where('data', 'RLIKE', $regexp)->count();
                         
                         //find lowest scoring (LOSER!)
                         if ($tally < $lowest){
@@ -136,6 +139,7 @@ class ElectionController extends Controller
 
                     //eliminate candidate (will break with duplicate names)
                     unset($currCands[array_search($eliminated, $currCands)]);
+                    array_push($losers, $eliminated);
 
                     fwrite($myfile, "    \"tallyResults\" : [ {\n"); //begin tallyResults
                     if($elimdCands == $election->candidates->count()-2){
@@ -162,7 +166,7 @@ class ElectionController extends Controller
                 fwrite($myfile, "}");//end file
                 fclose($myfile);
                 
-                break;
+                //break;
             default: //First Past The post
 
                 $arrName = array();
