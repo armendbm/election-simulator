@@ -14,7 +14,8 @@ class CandidateFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->name(),
+            'description' => $this->faker->paragraphs(2, true),
         ];
     }
 }

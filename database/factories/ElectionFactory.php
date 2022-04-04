@@ -14,7 +14,12 @@ class ElectionFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->company(),
+            'description' => $this->faker->paragraphs(2, true),
+            'public' => true,
+            'anonymous' => true,
+            'start_at' => now(),
+            'end_at' => now(),
         ];
     }
 }
