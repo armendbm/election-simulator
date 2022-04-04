@@ -46,6 +46,12 @@
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
         </a>
     </div>
+    
+    <div class="p-3 p-md-5 m-md-3 text-center">
+        <div class="col-md-5 p-lg-5 mx-auto my-5">
+            <h1>VISUAL OVERHAUL TO BE RELEASED</h1>
+        </div>
+    </div>
 
     {{-- Below are required to able to use carousel --}}
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
