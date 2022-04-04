@@ -1,66 +1,71 @@
 {
   "config" : {
-    "contest" : "Favorite Food",
-    "date" : "2022-04-03",
+    "contest" : "Greenholt-Shanahan",
+    "date" : "2022-04-04",
     "jurisdiction" : "Sample Data",
     "office" : "Council",
-    "threshold" : 1
+    "threshold" : 51
   },
   "results" : [ {
     "round" : 1.0,
     "tally" : {
-      "Chicken" : 0.0,
-      "Corn" : 0.0,
-      "Beans" : 0.0,
-      "Cake" : 0.0,
-      "Air" : 0.0
+      "George Abbott" : 20.0,
+      "Orlando Miller" : 18.0,
+      "Rex Kshlerin" : 19.0,
+      "Ida Nikolaus" : 29.0,
+      "Velda Kemmer" : 14.0
     },
     "tallyResults" : [ {
-      "eliminated" : "Chicken",
+      "eliminated" : "Velda Kemmer",
       "transfers" : {
-        "Corn" : 0.0,
-        "Beans" : 0.0,
-        "Cake" : 0.0,
-        "Air" : 0.0
+        "George Abbott" : 5.0,
+        "Orlando Miller" : 4.0,
+        "Rex Kshlerin" : 3.0,
+        "Ida Nikolaus" : 2.0
       }
     } ]
   },
   {
     "round" : 2.0,
     "tally" : {
-      "Corn" : 0.0,
-      "Beans" : 0.0,
-      "Cake" : 0.0,
-      "Air" : 0.0
+      "George Abbott" : 25.0,
+      "Orlando Miller" : 22.0,
+      "Rex Kshlerin" : 22.0,
+      "Ida Nikolaus" : 31.0
     },
     "tallyResults" : [ {
-      "eliminated" : "Corn",
+      "eliminated" : "Orlando Miller",
       "transfers" : {
-        "Beans" : 0.0,
-        "Cake" : 0.0,
-        "Air" : 0.0
+        "George Abbott" : 10.0,
+        "Rex Kshlerin" : 6.0,
+        "Ida Nikolaus" : 6.0
       }
     } ]
   },
   {
     "round" : 3.0,
     "tally" : {
-      "Beans" : 0.0,
-      "Cake" : 0.0,
-      "Air" : 0.0
+      "George Abbott" : 35.0,
+      "Rex Kshlerin" : 28.0,
+      "Ida Nikolaus" : 37.0
     },
     "tallyResults" : [ {
-      "eliminated" : "Beans",
+      "eliminated" : "Rex Kshlerin",
       "transfers" : {
-        "Cake" : 0.0,
-        "Air" : 0.0
+        "George Abbott" : 19.0,
+        "Ida Nikolaus" : 9.0
       }
     } ]
   },
   {
     "round" : 4.0,
     "tally" : {
-      "Cake" : 0.0,
-      "Air" : 0.0
+      "George Abbott" : 54.0,
+      "Ida Nikolaus" : 46.0
     },
     "tallyResults" : [ {
+      "elected" : "George Abbott"
+    } ]
+  }
+  ]
+}

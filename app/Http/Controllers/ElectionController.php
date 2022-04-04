@@ -136,27 +136,36 @@ class ElectionController extends Controller
                         $j++;
                     }
                     fwrite($myfile, "    },\n"); //end tally
-
                     //eliminate candidate (will break with duplicate names)
                     unset($currCands[array_search($eliminated, $currCands)]);
-                    array_push($losers, $eliminated);
 
                     fwrite($myfile, "    \"tallyResults\" : [ {\n"); //begin tallyResults
-                    if($elimdCands == $election->candidates->count()-2){
+                    if(count($currCands) == 1){
                         $txt = "      \"elected\" : \"" . $currCands[0]->name . "\"\n";
                         fwrite($myfile, $txt);
                     }else{
                         $txt = "      \"eliminated\" : \"" . $eliminated->name . "\",\n"; 
                         fwrite($myfile, $txt); //eliminated
                         fwrite($myfile, "      \"transfers\" : {\n"); //begin transfers
-                            foreach($currCands as $key => $candidate){
-                                $transfer = $election->votes()->where('data', 'like', $eliminated->id . ':%:' . $candidate->id . ':%')->count();
-                                $txt = "        \"" . $candidate->name . "\" : " . $transfer . ".0";
-                                $txt .= ($key === array_key_last($currCands)) ? "\n" : ",\n"; //no comma on last cand
-                                fwrite($myfile, $txt); //candidate transfer
+                        $j = 0;
+                        foreach($currCands as $key => $candidate){
+                            $elimIgnore = "(?:(?:";
+                            foreach($losers as $key => $loser){ //allow losers to precede
+                                $elimIgnore .= $loser->id . "|";
+                                //if($key !== array_key_last($losers)){$elimIgnore .= "|";} //having an or at the end changes nothing
                             }
+                            $elimIgnore .=")?:?){" . count($losers) . "}";
+                            $regexp = "^" . $elimIgnore . $eliminated->id . ':' . $elimIgnore . $candidate->id . ":.*";
+                            $transfer = $election->votes()->where('data', 'RLIKE', $regexp)->count();
+                            $txt = "        \"" . $candidate->name . "\" : " . $transfer . ".0";
+                            $txt .= ($j == count($currCands) - 1) ? "\n" : ",\n"; //no comma on last cand
+                            fwrite($myfile, $txt); //candidate transfer
+                            $j++;
+                        }
                         fwrite($myfile, "      }\n"); //end transfers
                     }
+                    //add to losers MUST BE DONE AFTER IFELSE NOT BEFORE BC REGEXP DEPENDS ON COUNT($LOSERS)
+                    array_push($losers, $eliminated);
                     
                     fwrite($myfile, "    } ]\n"); //end tallyResults
                     $txt = ($elimdCands == $election->candidates()->count()-2) ? "  }\n" : "  },\n"; //no comma on last cand
