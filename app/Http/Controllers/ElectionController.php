@@ -133,13 +133,34 @@ class ElectionController extends Controller
                         ->setMarkers(['#FF5722', '#E040FB'], 7, 10)
                         ->setXAxis($arrName);
 
-        $s = new DateTime($election->start_at->format('Y-m-d'));
-        $i = new DateInterval('P1D');
-        $e = new DateTime($election->end_at->format('Y-m-d'));
-        $period = new DatePeriod($s, $i, $e);
-                
+
+        $electionStartDate = $election->start_at->format('Y-m-d');
+        $electionEndDate = $election->start_at->format('Y-m-d');
+        // return gettype($electionEndDate);
+        // //  == $electionStartDate;
+        
+        if(strcmp($electionEndDate, $electionStartDate)==0){
+            $period = new DatePeriod(
+                new DateTime($election->start_at),
+                new DateInterval('P1D'),
+                new DateTime($election->end_at)
+            );
+        }else{
+            $period = new DatePeriod(
+                new DateTime($election->start_at),
+                new DateInterval('P1D'),
+                new DateTime($election->end_at->modify('+1 day'))
+            );
+        }
+        
+        // return $period->getEndDate();
+        // $s = new DateTime($election->start_at->format('Y-m-d'));
+        // $i = new DateInterval('P1D');
+        // $e = new DateTime($election->end_at->format('Y-m-d'));
+        // $period = new DatePeriod($s, $i, $e);
+        // return $period;        
+        
         $arrDates = array();
-                
         foreach ($period as $date) {
             array_push($arrDates, $date->format('Y-m-d'));
         }
@@ -162,7 +183,9 @@ class ElectionController extends Controller
             $temp = array();
             $temp2 = array();
             $num = 0;
+            return $arrDates;
             foreach($arrDates as $date){
+                return $date;
                                                                                 
                 $count = count($election->votes()->where('data', $candidate->id)->whereRaw('date(created_at) = ?', [date($date)])->get());
                 array_push($temp, $count);
@@ -172,7 +195,7 @@ class ElectionController extends Controller
             array_push($arr2dvotes, $temp);
             array_push($arr2dsumvotes, $temp2);
         }
-        // return $arr2dsumvotes;
+        return $arr2dsumvotes;
 
         for($x = 0; $x < count($arrVotes); $x++){
             $lineChart->addData($arrName[$x], $arr2dvotes[$x]);
