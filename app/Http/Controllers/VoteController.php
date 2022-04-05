@@ -43,9 +43,9 @@ class VoteController extends Controller
         $vote = new Vote;
         switch($election->system->value){
             case "irv": //Instant Runoff
-                foreach ($election->candidates()->get() as $index=>$candidate){
-                    $vote->data .= $request->{"vote" . $index} . ":";
-                }
+                $ranking = array();
+                parse_str($request->ranking, $ranking);
+                $vote->data = implode(":", $ranking["ranking"]);
                 break;
             default: //First Past The Post
                 $vote->data = $request->vote0;

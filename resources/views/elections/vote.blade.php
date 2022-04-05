@@ -13,20 +13,12 @@
                     <!--Voting interface changes based on $election->system->value-->
                     @switch($election->system->value) 
                         @case("irv") <!--Instant Runoff-->
-                            @foreach ($election->candidates()->get() as $index=>$candidate)
-                                <div class="mb-3">
-                                    <label for={{"vote" . $index }} class="form-label">{{"Candidate Choice #" . $index + 1}}</label>
-                                    <select name={{"vote" . $index }}  id={{"vote" . $index }} class="form-select" aria-label="Vote" required>
-                                        <option selected disabled value="">TESTS...</option>
-                                        @foreach ($election->candidates()->get() as $candidate)
-                                            <option value="{{ $candidate->id }}">{{ $candidate->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    <div class="invalid-feedback">
-                                        Please choose a candidate.
-                                    </div>
-                                </div>
-                            @endforeach
+                            <input type="hidden" name="ranking" id="ranking">
+                            <ul id="sortable" class="list-unstyled">
+                                @foreach ($election->candidates()->get() as $candidate)
+                                    <li id="ranking_{{ $candidate->id }}" class="ui-state-default user-select-none">{{ $candidate->name }}</li>
+                                @endforeach
+                            </ul>
                             @break
                         @default <!--First Past The Post-->
                             <div class="mb-3">
@@ -57,4 +49,16 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $(function() {
+            $("#sortable").sortable({
+                placeholder: "ui-state-highlight"
+            });
+            $("#sortable").disableSelection();
+        });
+        $("form").submit(function() {
+            $("#ranking").val($("#sortable").sortable("serialize"));
+        });
+    </script>
 </x-app-layout>
