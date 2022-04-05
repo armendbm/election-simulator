@@ -58,8 +58,8 @@ class VoteController extends Controller
         $vote->data = $request->vote;
         $vote->user_id = $request->user()->id;
         $election->votes()->save($vote);
-        $vote->date = $vote->created_at->format('Y-m-d');
-        $election->votes()->save($vote);
+        // $vote->date = $vote->created_at->format('Y-m-d');
+        // $election->votes()->save($vote);
         return redirect(route('dashboard'));
     }
 }

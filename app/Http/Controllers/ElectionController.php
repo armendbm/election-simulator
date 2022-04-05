@@ -157,7 +157,8 @@ class ElectionController extends Controller
             $temp2 = array();
             $num = 0;
             foreach($arrDates as $date){
-                $count = count($election->votes()->where('data', $candidate->id)->where('date', $date)->get());
+                                                                                
+                $count = count($election->votes()->where('data', $candidate->id)->whereRaw('date(created_at) = ?', [date($date)])->get());
                 array_push($temp, $count);
                 $num += $count;
                 array_push($temp2, $num);
