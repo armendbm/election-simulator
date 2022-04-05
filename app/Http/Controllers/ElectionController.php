@@ -80,7 +80,7 @@ class ElectionController extends Controller
      */
     public function show(Election $election)
     {
-        if (! Gate::allows('edit-election', $election)) {
+        if (! Gate::allows('edit-election', $election) && !$election->public) {
             abort(403);
         }
 
