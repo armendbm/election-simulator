@@ -123,7 +123,10 @@
                                         <td>Not sure how to find the person's name who held the election</td>
                                         <td>{{ $election->start_at }}</td>
                                         <td>{{ $election->end_at }}</td>
-                                        <td><a href="{{ route('elections.votes.create', ['election' => $election->id]) }}" class="btn btn-primary">Vote</a></td>
+                                        <td>
+                                            <a href="{{ route('elections.votes.create', ['election' => $election->id]) }}" class="btn btn-primary">Vote</a>
+                                            <a href="{{ route('elections.show', ['election' => $election->id]) }}" class="btn btn-primary">View Results</a>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
