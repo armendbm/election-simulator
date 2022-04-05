@@ -21,7 +21,7 @@ use function PHPUnit\Framework\fileExists;
 //
 // ===================================================
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome', ['elections' => Election::all()]);
 })->name('home');
 
 Route::get('/dashboard', function () {
