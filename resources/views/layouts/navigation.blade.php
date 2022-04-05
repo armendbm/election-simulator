@@ -12,18 +12,13 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/dashboard">Dashboard
+                    <a class="nav-link" href="/dashboard">Account
                         {!! Route::is('dashboard') ? ' <span class="sr-only">(current)</span>' : ''!!}
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/documentation">Documentation
                         {!! Route::is('documentation') ? ' <span class="sr-only">(current)</span>' : ''!!}
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/votingscreen">Voting Screen
-                        {!! Route::is('votingscreen') ? ' <span class="sr-only">(current)</span>' : ''!!}
                     </a>
                 </li>
             </ul>
