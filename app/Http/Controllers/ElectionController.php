@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Gate;
 
 use App\Http\Requests\StoreElectionRequest;
 use App\Http\Requests\UpdateElectionRequest;
@@ -78,7 +79,6 @@ class ElectionController extends Controller
                 //Threshold = droop quota
                 //Create JSON File -- writes to /election-simulator/public for some reason
                 $myfile = fopen("roundsUniversal.JSON", "w") or die("Unable to open file!");
-
                 fwrite($myfile, "{\n");
                 //-------------CONFIG--------------
                 fwrite($myfile, "  \"config\" : {\n");
@@ -175,7 +175,13 @@ class ElectionController extends Controller
                 fwrite($myfile, "  ]\n");//end results
                 fwrite($myfile, "}");//end file
                 fclose($myfile);
+
+                $response = Http::withHeaders([
+                    "Authorization" => "Token 9dd5b90a4af6fc9939002dd0db8f9160b5760007",
+                ])->attach('attachment', "roundsUniversal.JSON")->post("https://www.rcvis.com/api/visualizations");
+                $response = json_decode($response, true);
                 
+                return view('elections.show', compact('election', 'response'));
                 //break;
             default: //First Past The post
 
