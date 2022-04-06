@@ -131,7 +131,6 @@ class ElectionController extends Controller
                         ->setFontFamily('Calibri')
                         ->setColors(['#aaaab5'])
                         ->setMarkers(['#FF5722', '#E040FB'], 7, 10)
-                        // ->setGrid(false, '#3F51B5', 0.1)
                         ->setXAxis($arrName);
 
         $s = new DateTime($election->start_at->format('Y-m-d'));
@@ -220,7 +219,7 @@ class ElectionController extends Controller
         $election->end_at = $request->end_at;
         $request->user()->own_elections()->save($election);
 
-        return redirect(route('dashboard'));
+        return redirect(route('elections.manager'));
     }
 
     /**
@@ -236,6 +235,6 @@ class ElectionController extends Controller
         }
 
         $election->delete();
-        return redirect(route('dashboard'));
+        return redirect(route('elections.manager'));
     }
 }

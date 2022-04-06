@@ -30,6 +30,14 @@ Route::get('/dashboard', function () {
     return view('dashboard', ['elections' => Election::all(), 'users' => User::all()]);
 })->middleware(['auth'])->name('dashboard');
 
+Route::get('/manager', function () {
+    return view('manager', ['elections' => Election::all(), 'users' => User::all()]);
+})->middleware(['auth'])->name('manager');
+
+Route::get('/voting', function () {
+    return view('voting', ['elections' => Election::all(), 'users' => User::all()]);
+})->middleware(['auth'])->name('voting');
+
 Route::get('/documentation', function () {
     return view('documentation', ['resultHandler' => new result_handler()]);
 })->name('documentation');
