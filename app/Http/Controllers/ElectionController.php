@@ -115,6 +115,7 @@ class ElectionController extends Controller
                 fwrite($myfile, "  \"results\" : [ {\n");
                 $currCands = $election->candidates()->get()->all(); //array of current candidates
                 $losers = array();
+                $winners = array();
                 //for simplicity, # of rounds = # of candidates - 1
                 for ($elimdCands = 0; $elimdCands < $election->candidates()->count()-1; $elimdCands++){
                     if($elimdCands != 0){fwrite($myfile, "  {\n");}
@@ -156,6 +157,7 @@ class ElectionController extends Controller
 
                     fwrite($myfile, "    \"tallyResults\" : [ {\n"); //begin tallyResults
                     if(count($currCands) == 1){
+                        array_push($winners, $currCands[array_key_first($currCands)]->name);
                         /* $txt = "      \"elected\" : \"" . $currCands[0]->name . "\"\n"; */
                         $txt = "      \"elected\" : \"" . $currCands[array_key_first($currCands)]->name . "\"\n";
                         fwrite($myfile, $txt);
@@ -196,7 +198,7 @@ class ElectionController extends Controller
                 ])->attach('attachment', "roundsUniversal.JSON")->post("https://www.rcvis.com/api/visualizations");
                 $response = json_decode($response, true);
                 
-                return view('elections.show', compact('election', 'response'));
+                return view('elections.show', compact('election', 'winners', 'response'));
                 //break;
             default: //First Past The post
 
@@ -215,7 +217,14 @@ class ElectionController extends Controller
                 //     else {
                 //         array_push($arrVotesPercent, (double)number_format((double)$arrVotes[$x]/$sum * 100, 2, '.', ''));
                 //     }
-
+                
+                $maxVotes = max($arrVotes);
+                $winners = array();
+                for ($x = 0; $x < count($arrName); $x++) {
+                    if ($arrVotes[$x] == $maxVotes) {
+                        array_push($winners, $arrName[$x]);
+                    }
+                }
                 $pie = (new LarapexChart)->pieChart()
                                 ->setTitle('Proportion of Votes')
                                 ->setDataset($arrVotes)
@@ -237,7 +246,7 @@ class ElectionController extends Controller
                                 // ->setGrid(false, '#3F51B5', 0.1)
                                 ->setXAxis($arrName);
 
-                return view('elections.show', compact('election', 'pie', 'barChart', 'arrName', 'arrVotes'));
+                return view('elections.show', compact('election', 'pie', 'barChart', 'arrName', 'arrVotes', 'winners'));
         }
     }
     

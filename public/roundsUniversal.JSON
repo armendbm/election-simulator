@@ -1,6 +1,6 @@
 {
   "config" : {
-    "contest" : "Grant, Gleason and Eichmann",
+    "contest" : "Nikolaus-Hills",
     "date" : "2022-04-04",
     "jurisdiction" : "Sample Data",
     "office" : "Council",
@@ -9,62 +9,62 @@
   "results" : [ {
     "round" : 1.0,
     "tally" : {
-      "Alvena Cummerata" : 17.0,
-      "Mandy Kshlerin III" : 21.0,
-      "Theodore Lesch" : 20.0,
-      "Fiona VonRueden" : 21.0,
-      "Demarco Kling" : 21.0
+      "Effie Farrell" : 17.0,
+      "Prof. Abner Dooley" : 23.0,
+      "Jedidiah Wolff" : 21.0,
+      "Miss Ethyl Pouros V" : 19.0,
+      "Ivy Tillman" : 20.0
     },
     "tallyResults" : [ {
-      "eliminated" : "Alvena Cummerata",
+      "eliminated" : "Effie Farrell",
       "transfers" : {
-        "Mandy Kshlerin III" : 3.0,
-        "Theodore Lesch" : 6.0,
-        "Fiona VonRueden" : 3.0,
-        "Demarco Kling" : 5.0
+        "Prof. Abner Dooley" : 5.0,
+        "Jedidiah Wolff" : 5.0,
+        "Miss Ethyl Pouros V" : 3.0,
+        "Ivy Tillman" : 4.0
       }
     } ]
   },
   {
     "round" : 2.0,
     "tally" : {
-      "Mandy Kshlerin III" : 24.0,
-      "Theodore Lesch" : 26.0,
-      "Fiona VonRueden" : 24.0,
-      "Demarco Kling" : 26.0
+      "Prof. Abner Dooley" : 28.0,
+      "Jedidiah Wolff" : 26.0,
+      "Miss Ethyl Pouros V" : 22.0,
+      "Ivy Tillman" : 24.0
     },
     "tallyResults" : [ {
-      "eliminated" : "Mandy Kshlerin III",
+      "eliminated" : "Miss Ethyl Pouros V",
       "transfers" : {
-        "Theodore Lesch" : 10.0,
-        "Fiona VonRueden" : 2.0,
-        "Demarco Kling" : 12.0
+        "Prof. Abner Dooley" : 5.0,
+        "Jedidiah Wolff" : 8.0,
+        "Ivy Tillman" : 9.0
       }
     } ]
   },
   {
     "round" : 3.0,
     "tally" : {
-      "Theodore Lesch" : 36.0,
-      "Fiona VonRueden" : 26.0,
-      "Demarco Kling" : 38.0
+      "Prof. Abner Dooley" : 33.0,
+      "Jedidiah Wolff" : 34.0,
+      "Ivy Tillman" : 33.0
     },
     "tallyResults" : [ {
-      "eliminated" : "Fiona VonRueden",
+      "eliminated" : "Prof. Abner Dooley",
       "transfers" : {
-        "Theodore Lesch" : 13.0,
-        "Demarco Kling" : 13.0
+        "Jedidiah Wolff" : 20.0,
+        "Ivy Tillman" : 13.0
       }
     } ]
   },
   {
     "round" : 4.0,
     "tally" : {
-      "Theodore Lesch" : 49.0,
-      "Demarco Kling" : 51.0
+      "Jedidiah Wolff" : 54.0,
+      "Ivy Tillman" : 46.0
     },
     "tallyResults" : [ {
-      "elected" : "Demarco Kling"
+      "elected" : "Jedidiah Wolff"
     } ]
   }
   ]
