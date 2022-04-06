@@ -141,7 +141,8 @@ class ElectionController extends Controller
 
                     fwrite($myfile, "    \"tallyResults\" : [ {\n"); //begin tallyResults
                     if(count($currCands) == 1){
-                        $txt = "      \"elected\" : \"" . $currCands[0]->name . "\"\n";
+                        /* $txt = "      \"elected\" : \"" . $currCands[0]->name . "\"\n"; */
+                        $txt = "      \"elected\" : \"" . $currCands[array_key_first($currCands)]->name . "\"\n";
                         fwrite($myfile, $txt);
                     }else{
                         $txt = "      \"eliminated\" : \"" . $eliminated->name . "\",\n"; 
