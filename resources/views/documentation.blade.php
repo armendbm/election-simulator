@@ -8,7 +8,6 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <p>Total users Result Handler: {{ $resultHandler -> getVoteTotal() }} </p>
                     <h4 class="mt-3">Overview</h4>
                     <p style="text-indent: 5rem">
                         Civics is a complex topic fundamental to performing our duties as a member of our society. Learning about voting systems can be exhaustive, and people often do not have the time to simulate elections on their own. Since elections are often taught through hypotheticals and lectures, we seek to create a hands-on tool that allows users to manipulate, test, and better understand different systems of elections.
