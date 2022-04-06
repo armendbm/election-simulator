@@ -1,6 +1,6 @@
 {
   "config" : {
-    "contest" : "Greenholt-Shanahan",
+    "contest" : "Grant, Gleason and Eichmann",
     "date" : "2022-04-04",
     "jurisdiction" : "Sample Data",
     "office" : "Council",
@@ -9,62 +9,62 @@
   "results" : [ {
     "round" : 1.0,
     "tally" : {
-      "George Abbott" : 20.0,
-      "Orlando Miller" : 18.0,
-      "Rex Kshlerin" : 19.0,
-      "Ida Nikolaus" : 29.0,
-      "Velda Kemmer" : 14.0
+      "Alvena Cummerata" : 17.0,
+      "Mandy Kshlerin III" : 21.0,
+      "Theodore Lesch" : 20.0,
+      "Fiona VonRueden" : 21.0,
+      "Demarco Kling" : 21.0
     },
     "tallyResults" : [ {
-      "eliminated" : "Velda Kemmer",
+      "eliminated" : "Alvena Cummerata",
       "transfers" : {
-        "George Abbott" : 5.0,
-        "Orlando Miller" : 4.0,
-        "Rex Kshlerin" : 3.0,
-        "Ida Nikolaus" : 2.0
+        "Mandy Kshlerin III" : 3.0,
+        "Theodore Lesch" : 6.0,
+        "Fiona VonRueden" : 3.0,
+        "Demarco Kling" : 5.0
       }
     } ]
   },
   {
     "round" : 2.0,
     "tally" : {
-      "George Abbott" : 25.0,
-      "Orlando Miller" : 22.0,
-      "Rex Kshlerin" : 22.0,
-      "Ida Nikolaus" : 31.0
+      "Mandy Kshlerin III" : 24.0,
+      "Theodore Lesch" : 26.0,
+      "Fiona VonRueden" : 24.0,
+      "Demarco Kling" : 26.0
     },
     "tallyResults" : [ {
-      "eliminated" : "Orlando Miller",
+      "eliminated" : "Mandy Kshlerin III",
       "transfers" : {
-        "George Abbott" : 10.0,
-        "Rex Kshlerin" : 6.0,
-        "Ida Nikolaus" : 6.0
+        "Theodore Lesch" : 10.0,
+        "Fiona VonRueden" : 2.0,
+        "Demarco Kling" : 12.0
       }
     } ]
   },
   {
     "round" : 3.0,
     "tally" : {
-      "George Abbott" : 35.0,
-      "Rex Kshlerin" : 28.0,
-      "Ida Nikolaus" : 37.0
+      "Theodore Lesch" : 36.0,
+      "Fiona VonRueden" : 26.0,
+      "Demarco Kling" : 38.0
     },
     "tallyResults" : [ {
-      "eliminated" : "Rex Kshlerin",
+      "eliminated" : "Fiona VonRueden",
       "transfers" : {
-        "George Abbott" : 19.0,
-        "Ida Nikolaus" : 9.0
+        "Theodore Lesch" : 13.0,
+        "Demarco Kling" : 13.0
       }
     } ]
   },
   {
     "round" : 4.0,
     "tally" : {
-      "George Abbott" : 54.0,
-      "Ida Nikolaus" : 46.0
+      "Theodore Lesch" : 49.0,
+      "Demarco Kling" : 51.0
     },
     "tallyResults" : [ {
-      "elected" : "George Abbott"
+      "elected" : "Demarco Kling"
     } ]
   }
   ]
