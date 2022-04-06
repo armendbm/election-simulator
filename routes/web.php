@@ -7,23 +7,21 @@ use App\Http\Controllers\VoteController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\result_handler;
 use App\Models\Election;
-
 use function PHPUnit\Framework\fileExists;
 
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
+//Standard Web Routes ================================
+//      
+//     *Standard Web routes switch web page
+//      views to common pages, more niche
+//      web routes exist as view functions
+//      called elsewhere, ie election creator
+//      will reference election editor pages
+//
+// ===================================================
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome', ['elections' => Election::all()]);
 })->name('home');
 
 Route::get('/dashboard', function () {
@@ -37,15 +35,20 @@ Route::get('/documentation', function () {
 Route::get('/votingscreen', function () {
     return view('votingscreen');
 })->name('votingscreen');
+//Standard Web Routes ================================
 
-// Below are the Route created for Dashboard ================================
+
+//Account Managment Routes ================================
 Route::get('delete/{id}', [UserController::class,'delete']);
 Route::post('editUserName/', [UserController::class,'editUserName']);
 Route::post('editPassword/', [UserController::class,'editPassword']);
 Route::post('editEmail/', [UserController::class,'editEmail']);
+//Account Managment Routes ================================
 
+//Election Creation Routes ================================
 Route::resource('elections', ElectionController::class)->middleware('auth');
 Route::resource('elections.candidates', CandidateController::class)->only(['store', 'update', 'destroy'])->middleware('auth');
 Route::resource('elections.votes', VoteController::class)->only(['create', 'store'])->middleware('auth');
+//Election Creation Routes ================================
 
 require __DIR__.'/auth.php';

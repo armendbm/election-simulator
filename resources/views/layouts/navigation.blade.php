@@ -12,7 +12,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/dashboard">Dashboard
+                    <a class="nav-link" href="/dashboard">Account
                         {!! Route::is('dashboard') ? ' <span class="sr-only">(current)</span>' : ''!!}
                     </a>
                 </li>
@@ -20,21 +20,6 @@
                     <a class="nav-link" href="/documentation">Documentation
                         {!! Route::is('documentation') ? ' <span class="sr-only">(current)</span>' : ''!!}
                     </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/votingscreen">Voting Screen
-                        {!! Route::is('votingscreen') ? ' <span class="sr-only">(current)</span>' : ''!!}
-                    </a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        More
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
                 </li>
             </ul>
             @auth
