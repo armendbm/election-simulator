@@ -7,6 +7,8 @@ use App\Http\Controllers\VoteController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\result_handler;
 use App\Models\Election;
+use App\Models\User;
+
 use function PHPUnit\Framework\fileExists;
 
 
@@ -25,8 +27,16 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/dashboard', function () {
-    return view('dashboard', ['elections' => Election::all()]);
+    return view('dashboard', ['elections' => Election::all(), 'users' => User::all()]);
 })->middleware(['auth'])->name('dashboard');
+
+Route::get('/manager', function () {
+    return view('manager', ['elections' => Election::all(), 'users' => User::all()]);
+})->middleware(['auth'])->name('manager');
+
+Route::get('/voting', function () {
+    return view('voting', ['elections' => Election::all(), 'users' => User::all()]);
+})->middleware(['auth'])->name('voting');
 
 Route::get('/documentation', function () {
     return view('documentation', ['resultHandler' => new result_handler()]);

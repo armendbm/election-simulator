@@ -16,7 +16,8 @@
             <h2>This version is for functional testing only</h2>
             <p>Current version is merely for basic functional testing and site layout. All UI is to be overhauled between beta and final release.</p>
             <h2>Next Release: Beta Midnight 04/08/22</h2>
-            <h2>Version: Alpha 1.0</h2>
+            <h2>Version: Alpha 1.2</h2>
+            <p>--Updated Site Layout--</p>
         </div>
     </div>
     @if (count($elections->where('public', 1)) > 0)

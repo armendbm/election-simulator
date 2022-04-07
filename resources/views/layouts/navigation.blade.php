@@ -8,12 +8,7 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item active">
                     <a class="nav-link" href="/">Home
-                        {!! Route::is('home') ? ' <span class="sr-only">(current)</span>' : ''!!}
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/dashboard">Account
-                        {!! Route::is('dashboard') ? ' <span class="sr-only">(current)</span>' : ''!!}
+                        {!! Route::is('welcome') ? ' <span class="sr-only">(current)</span>' : ''!!}
                     </a>
                 </li>
                 <li class="nav-item">
@@ -21,6 +16,21 @@
                         {!! Route::is('documentation') ? ' <span class="sr-only">(current)</span>' : ''!!}
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/manager">Elections
+                        {!! Route::is('manager') ? ' <span class="sr-only">(current)</span>' : ''!!}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/voting">Vote
+                        {!! Route::is('voting') ? ' <span class="sr-only">(current)</span>' : ''!!}
+                    </a>
+                </li>
+            </ul>
+            <ul class="navbar-nav mb-2 mb-lg-0" align="right">
+                <a class="nav-link" href="/dashboard">Account
+                        {!! Route::is('dashboard') ? ' <span class="sr-only">(current)</span>' : ''!!}
+                </a>
             </ul>
             @auth
                 <form method="POST" action="{{ route('logout') }}">

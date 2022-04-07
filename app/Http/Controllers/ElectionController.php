@@ -10,7 +10,12 @@ use App\Http\Requests\StoreElectionRequest;
 use App\Http\Requests\UpdateElectionRequest;
 use App\Models\Election;
 use ArielMejiaDev\LarapexCharts\LarapexChart;
+use DateInterval;
+use DatePeriod;
+use DateTime;
+use Illuminate\Support\Arr;
 use RealRashid\SweetAlert\Facades\Alert;
+use SebastianBergmann\CodeCoverage\CrapIndex;
 
 /**
  * VoteController Class functions to create, edit, and store
@@ -202,7 +207,6 @@ class ElectionController extends Controller
                 return view('elections.show', compact('election', 'winners', 'response'));
                 //break;
             default: //First Past The post
-
                 $arrName = array();
                 $arrVotes = array();
                 foreach ($election->candidates()->get() as $candidate) {
@@ -218,7 +222,6 @@ class ElectionController extends Controller
                 //     else {
                 //         array_push($arrVotesPercent, (double)number_format((double)$arrVotes[$x]/$sum * 100, 2, '.', ''));
                 //     }
-                
                 $maxVotes = max($arrVotes);
                 $winners = array();
                 for ($x = 0; $x < count($arrName); $x++) {
@@ -226,11 +229,12 @@ class ElectionController extends Controller
                         array_push($winners, $arrName[$x]);
                     }
                 }
+
                 $pie = (new LarapexChart)->pieChart()
                                 ->setTitle('Proportion of Votes')
                                 ->setDataset($arrVotes)
                                 ->setFontFamily('Calibri')
-                                // ->setColors(['#000000', '#333333', '#666666', '#999999', '#CCCCCC', '#FFFFFF',])
+                                ->setColors(['#886eaa', '#e690ba', '#ebc0e4', '#fee9ea', '#ffcfb3', '#aef6f7','2f9fb3'])
                                 ->setLabels($arrName);
 
                 $barChart = (new LarapexChart)->horizontalBarChart()
@@ -243,11 +247,56 @@ class ElectionController extends Controller
                                     ]
                                 ])
                                 ->setFontFamily('Calibri')
+                                ->setColors(['#aaaab5'])
                                 ->setMarkers(['#FF5722', '#E040FB'], 7, 10)
-                                // ->setGrid(false, '#3F51B5', 0.1)
                                 ->setXAxis($arrName);
 
-                return view('elections.show', compact('election', 'pie', 'barChart', 'arrName', 'arrVotes', 'winners'));
+                $s = new DateTime($election->start_at->format('Y-m-d'));
+                $i = new DateInterval('P1D');
+                $e = new DateTime($election->end_at->format('Y-m-d'));
+                $period = new DatePeriod($s, $i, $e);
+                        
+                $arrDates = array();
+                        
+                foreach ($period as $date) {
+                    array_push($arrDates, $date->format('Y-m-d'));
+                }
+
+                $lineChart = (new LarapexChart)->lineChart()
+                                ->setTitle('Each day\'s number of votes')
+                                ->setFontFamily('Calibri')
+                                ->setColors(['#886eaa', '#e690ba', '#ebc0e4', '#fee9ea', '#ffcfb3', '#aef6f7','2f9fb3'])
+                                ->setXAxis($arrDates);
+                
+                $lineChart2 = (new LarapexChart)->lineChart()
+                                ->setTitle('Sum of votes')
+                                ->setFontFamily('Calibri')
+                                ->setColors(['#886eaa', '#e690ba', '#ebc0e4', '#fee9ea', '#ffcfb3', '#aef6f7','2f9fb3'])
+                                ->setXAxis($arrDates);
+
+                $arr2dvotes = array();
+                $arr2dsumvotes = array();
+                foreach ($election->candidates()->get() as $candidate) {
+                    $temp = array();
+                    $temp2 = array();
+                    $num = 0;
+                    foreach($arrDates as $date){
+                                                                                        
+                        $count = count($election->votes()->where('data', $candidate->id)->whereRaw('date(created_at) = ?', [date($date)])->get());
+                        array_push($temp, $count);
+                        $num += $count;
+                        array_push($temp2, $num);
+                    }
+                    array_push($arr2dvotes, $temp);
+                    array_push($arr2dsumvotes, $temp2);
+                }
+                // return $arr2dsumvotes;
+
+                for($x = 0; $x < count($arrVotes); $x++){
+                    $lineChart->addData($arrName[$x], $arr2dvotes[$x]);
+                    $lineChart2->addData($arrName[$x], $arr2dsumvotes[$x]);
+                }
+                return view('elections.show', compact('election', 'pie', 'barChart', 'arrName', 'arrVotes', 'lineChart', 'lineChart2', 'winners'));
         }
     }
     
@@ -290,7 +339,7 @@ class ElectionController extends Controller
         $election->end_at = $request->end_at;
         $request->user()->own_elections()->save($election);
 
-        return redirect(route('dashboard'));
+        return redirect(route('elections.manager'));
     }
 
     /**
@@ -306,6 +355,6 @@ class ElectionController extends Controller
         }
 
         $election->delete();
-        return redirect(route('dashboard'));
+        return redirect(route('elections.manager'));
     }
 }
