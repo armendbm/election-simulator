@@ -3,9 +3,17 @@
     <h1>
         {{ __('Voting Screen:') }}
     </h1>
-    <h2>
+    <h1>
         {{$election->name}}
+    </h1>
+    @if ($election->system->value == "irv")
+    <h2>
+        Drag Candidates
     </h2>
+    <p>
+    Top candidate as 1st choice, bottom candidate as last choice
+    </p>
+    @endif
 
 
     <div class="py-12">
