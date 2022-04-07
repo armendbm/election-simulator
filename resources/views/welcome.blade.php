@@ -20,13 +20,15 @@
         </div>
     </div>
     @if (count($elections->where('public', 1)) > 0)
-    <h3>Public Elections</h3>
+    <h3>Admin Elections</h3>
     <ul class="list-group list-group-flush">
         @foreach ($elections->where('public', 1) as $election)
-        <p>
-            {{ $election->name }} {{ $election->description }}
-            <a href="{{ route('elections.show', ['election' => $election->id]) }}" class="btn btn-primary">View Results</a>
-        </p>
+            @if ($election->owner_id == 1)
+            <p>
+                {{ $election->name }} {{ $election->description }}
+                <a href="{{ route('elections.show', ['election' => $election->id]) }}" class="btn btn-primary">View Results</a>
+            </p>
+            @endif
         @endforeach
     </ul>
     @endif
