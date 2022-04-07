@@ -42,14 +42,14 @@
                     <!-- <p class="ml-3 my-3 h5"><strong>Results</strong></p> -->
                     <div class="col-lg-6">
                         @if ($election->system->value == 'irv')
-                            <iframe height="500" width="500" src="{{ $response['results'][0]['embedUrl'] }}"></iframe>
+                            <iframe height="600" width="600" src="{{ $response['embedUrl'] }}"></iframe>
                         @else
                             {!! $barChart -> container() !!}
                         @endif
                     </div>
                     <div class="col-lg-6">
                         @if ($election->system->value == 'irv')
-                            <iframe height="500" width="500" src="{{ $response['results'][0]['embedSankeyUrl'] }}"></iframe>
+                            <iframe height="600" width="600" src="{{ $response['embedSankeyUrl'] }}"></iframe>
                         @else
                             {!! $pie -> container() !!}
                         @endif

@@ -93,7 +93,7 @@ class ElectionController extends Controller
 
                 //Threshold = droop quota
                 //Create JSON File -- writes to /election-simulator/public for some reason
-                $myfile = fopen("roundsUniversal.JSON", "w") or die("Unable to open file!");
+                $myfile = fopen("roundsUniversal.JSON", "w+") or die("Unable to open file!");
                 fwrite($myfile, "{\n");
                 //-------------CONFIG--------------
                 fwrite($myfile, "  \"config\" : {\n");
@@ -191,12 +191,13 @@ class ElectionController extends Controller
                 }
                 fwrite($myfile, "  ]\n");//end results
                 fwrite($myfile, "}");//end file
-                fclose($myfile);
 
+                rewind($myfile);
                 $response = Http::withHeaders([
                     "Authorization" => "Token 9dd5b90a4af6fc9939002dd0db8f9160b5760007",
-                ])->attach('attachment', "roundsUniversal.JSON")->post("https://www.rcvis.com/api/visualizations");
-                $response = json_decode($response, true);
+                ])->attach('jsonFile', $myfile)->post("https://www.rcvis.com/api/visualizations/");
+
+                fclose($myfile);
                 
                 return view('elections.show', compact('election', 'winners', 'response'));
                 //break;
