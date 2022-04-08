@@ -18,24 +18,6 @@
                         @endfor
                     @endif
                 </div>
-                <table class="table table-striped table-hover table-reflow">
-                    <thead>
-                        <tr>
-                            <th><strong> Name: </strong></th>
-                            <th><strong> Votes: </strong></th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        @for ($i = 0; $i < count($arrName); $i++)
-                            <tr>
-                                <td>{{ $arrName[$i] }}</td>
-                                <td>{{ $arrVotes[$i] }}</td>
-                            </tr>
-
-                        @endfor
-                    @endif
-                </div>
                 
                 @if ($election->system->value == 'fptp')
                     <table class="table table-striped table-hover table-reflow">
@@ -57,6 +39,7 @@
                     </table>
                 @endif
                 <div class="row no-gutters aw-main-wrapper">
+                    <!-- <p class="ml-3 my-3 h5"><strong>Results</strong></p> -->
                     <div class="col-lg-6">
                         @if ($election->system->value == 'irv')
                             <iframe height="600" width="600" src="{{ $response['embedUrl'] }}"></iframe>
@@ -72,14 +55,16 @@
                         @endif
                     </div>
                 </div>
-                <div class="row no-gutters aw-main-wrapper">
-                    <div class="col-lg-6">
-                        {!! $lineChart -> container() !!}
+                @if ($election->system->value == 'fptp')
+                    <div class="row no-gutters aw-main-wrapper">
+                        <div class="col-lg-6">
+                            {!! $lineChart -> container() !!}
+                        </div>
+                        <div class="col-lg-6">
+                            {!! $lineChart2 -> container() !!}
+                        </div>
                     </div>
-                    <div class="col-lg-6">
-                        {!! $lineChart2 -> container() !!}
-                    </div>
-                </div>
+                @endif
             </div>
         </div>
     </div>

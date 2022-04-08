@@ -24,21 +24,22 @@
                                 </button>
                             </h2>
                             <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                                <br>
-                                <p style="text-indent: 5rem">
-                                    Standing for "first-past-the-post", the FPTP electoral
-                                    system is the quintessential electoral system in which the
-                                    candidate with the plurality of votes is the winner. That
-                                    is just a fancy way of saying that whoever has the most votes
-                                    wins, end of story.
-                                </p>     
-                                <p style="text-indent: 5rem">
-                                    FPTP is also known as single-member plurality voting (SMP) or
-                                    choose-one voting.
-                                    It is the primary electoral system in much of the English-speaking
-                                    world, including Canada, India, the United Kingdom,
-                                    and, most notably, the United States.
-                                </p>                     
+                                <div class="border border-3 mx-3 my-3 rounded-2">
+                                    <p class = "mx-3 my-2" style="text-indent: 5rem">
+                                        Standing for "first-past-the-post", the FPTP electoral
+                                        system is the quintessential electoral system in which the
+                                        candidate with the plurality of votes is the winner. That
+                                        is just a fancy way of saying that whoever has the most votes
+                                        wins, end of story.
+                                    </p>     
+                                    <p class = "mx-3 my-2" style="text-indent: 5rem">
+                                        FPTP is also known as single-member plurality voting (SMP) or
+                                        choose-one voting.
+                                        It is the primary electoral system in much of the English-speaking
+                                        world, including Canada, India, the United Kingdom,
+                                        and, most notably, the United States.
+                                    </p>    
+                                </div>             
                             </div>
                         </div>
                         <div class="accordion-item">
@@ -48,25 +49,25 @@
                                 </button>
                             </h2>
                             <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-                                <br>
-                                <p style="text-indent: 5rem">
-                                    Standing for "instant-runoff voting", the IRV electoral
-                                    system is a form of ranked preferential voting in which voters
-                                    rank the candidates from their most to least preferred. There
-                                    will be rounds in which the candidates with the fewest
-                                    first-perference votes will be eliminated, and each vote that
-                                    had the eliminated candidate as the first preference will
-                                    then be counted for the vote's candidate with the next
-                                    highest preference. This cycle continues until the desired number of candidates
-                                    remain whom will then be declared the winners.
-                                </p>
-                                <p style="text-indent: 5rem">
-                                    IRV is sometimes referred to as preferential voting,
-                                    alternative voting, ranked-choice voting (United States), or
-                                    single transferable voting (New Zealad). It is practiced
-                                    nationwide in Australia and Canada, and has been practiced
-                                    on local levels in the United States.
-                                </p>                            
+                                <div class="border border-3 mx-3 my-3 rounded-2">
+                                    <p class = "mx-3 my-2" style="text-indent: 5rem">
+                                        Standing for "instant-runoff voting", the IRV electoral
+                                        system is a form of ranked preferential voting in which voters
+                                        rank the candidates from their most to least preferred. There
+                                        will be rounds in which the candidates with the fewest
+                                        first-perference votes will be eliminated, and each vote that
+                                        had the eliminated candidate as the first preference will
+                                        then be counted for the vote's candidate with the next
+                                        highest preference. This cycle continues until the desired number of candidates
+                                        remain whom will then be declared the winners.
+                                    </p>
+                                    <p class = "mx-3 my-2" style="text-indent: 5rem">
+                                        IRV is sometimes referred to as preferential voting,
+                                        alternative voting, ranked-choice voting (United States), or
+                                        single transferable voting (New Zealad). It is practiced
+                                        nationwide in Australia and Canada, and has been practiced
+                                        on local levels in the United States.
+                                    </p>                            
                             </div>
                         </div>
                     </div>

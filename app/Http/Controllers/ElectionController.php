@@ -207,6 +207,7 @@ class ElectionController extends Controller
                 return view('elections.show', compact('election', 'winners', 'response'));
                 //break;
             default: //First Past The post
+                
                 $arrName = array();
                 $arrVotes = array();
                 foreach ($election->candidates()->get() as $candidate) {
@@ -253,10 +254,8 @@ class ElectionController extends Controller
         
         
                 $electionStartDate = $election->start_at->format('Y-m-d');
-                $electionEndDate = $election->start_at->format('Y-m-d');
-                // return gettype($electionEndDate);
-                // //  == $electionStartDate;
-                
+                $electionEndDate = $election->end_at->format('Y-m-d');
+
                 if(strcmp($electionEndDate, $electionStartDate)==0){
                     $period = new DatePeriod(
                         new DateTime($election->start_at),
@@ -269,20 +268,13 @@ class ElectionController extends Controller
                         new DateInterval('P1D'),
                         new DateTime($election->end_at->modify('+1 day'))
                     );
-                }
-                
-                // return $period->getEndDate();
-                // $s = new DateTime($election->start_at->format('Y-m-d'));
-                // $i = new DateInterval('P1D');
-                // $e = new DateTime($election->end_at->format('Y-m-d'));
-                // $period = new DatePeriod($s, $i, $e);
-                // return $period;        
+                } 
                 
                 $arrDates = array();
                 foreach ($period as $date) {
                     array_push($arrDates, $date->format('Y-m-d'));
                 }
-        
+
                 $lineChart = (new LarapexChart)->lineChart()
                                 ->setTitle('Each day\'s number of votes')
                                 ->setFontFamily('Calibri')
@@ -301,10 +293,7 @@ class ElectionController extends Controller
                     $temp = array();
                     $temp2 = array();
                     $num = 0;
-                    return $arrDates;
-                    foreach($arrDates as $date){
-                        return $date;
-                                                                                        
+                    foreach($arrDates as $date){                                                                                        
                         $count = count($election->votes()->where('data', $candidate->id)->whereRaw('date(created_at) = ?', [date($date)])->get());
                         array_push($temp, $count);
                         $num += $count;
@@ -313,7 +302,7 @@ class ElectionController extends Controller
                     array_push($arr2dvotes, $temp);
                     array_push($arr2dsumvotes, $temp2);
                 }
-                return $arr2dsumvotes;
+                // return $arr2dsumvotes;
         
                 for($x = 0; $x < count($arrVotes); $x++){
                     $lineChart->addData($arrName[$x], $arr2dvotes[$x]);
@@ -362,7 +351,7 @@ class ElectionController extends Controller
         $election->end_at = $request->end_at;
         $request->user()->own_elections()->save($election);
 
-        return redirect(route('elections.manager'));
+        return redirect(route('manager'));
     }
 
     /**
@@ -378,6 +367,6 @@ class ElectionController extends Controller
         }
 
         $election->delete();
-        return redirect(route('elections.manager'));
+        return redirect(route('manager'));
     }
 }
