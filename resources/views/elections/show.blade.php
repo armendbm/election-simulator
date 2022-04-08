@@ -55,6 +55,16 @@
                         @endif
                     </div>
                 </div>
+                @if ($election->system->value == 'fptp')
+                    <div class="row no-gutters aw-main-wrapper">
+                        <div class="col-lg-6">
+                            {!! $lineChart -> container() !!}
+                        </div>
+                        <div class="col-lg-6">
+                            {!! $lineChart2 -> container() !!}
+                        </div>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
@@ -65,6 +75,10 @@
         {{ $pie->script() }}
         <script src="{{ $barChart->cdn() }}"></script>
         {{ $barChart->script() }}
+        <script src="{{ $lineChart->cdn() }}"></script>
+        {{ $lineChart->script() }}
+        <script src="{{ $lineChart2->cdn() }}"></script>
+        {{ $lineChart2->script() }}
     @endif
     
 </x-app-layout>
