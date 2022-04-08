@@ -2,7 +2,7 @@
     <div class="card">
         <div class="card-header text-center">
             <h1 class="fw-normal">Elections To-Go</h1>
-            <h3 class="fw-light">Reset password</p>
+            <h3 class="fw-light">Reset password</h3>
         </div>
         <div class="card-body">
             @if (count($errors) > 0)
