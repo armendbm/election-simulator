@@ -59,7 +59,8 @@
                     <div class="mb-3">
                         <label for="system" class="form-label">System</label>
                         <select name="system" id="system" class="form-select" aria-label="System" required>
-                            <option selected value="fptp">FPTP</option>
+                            <option value="fptp" <?=($election->system->value=="fptp") ? "selected" : ""?>>FPTP</option>
+                            <option value="irv" <?=($election->system->value=="irv") ? "selected" : ""?>>IRV</option>
                         </select>
                         <div class="invalid-feedback">
                             Please select a system.

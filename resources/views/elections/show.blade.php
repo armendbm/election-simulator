@@ -32,15 +32,44 @@
                                 <td>{{ $arrName[$i] }}</td>
                                 <td>{{ $arrVotes[$i] }}</td>
                             </tr>
+
                         @endfor
-                    </tbody>
-                </table>
+                    @endif
+                </div>
+                
+                @if ($election->system->value == 'fptp')
+                    <table class="table table-striped table-hover table-reflow">
+                        <thead>
+                            <tr>
+                                <th><strong> Name: </strong></th>
+                                <th><strong> Votes: </strong></th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @for ($i = 0; $i < count($arrName); $i++)
+                                <tr>
+                                    <td>{{ $arrName[$i] }}</td>
+                                    <td>{{ $arrVotes[$i] }}</td>
+                                </tr>
+                            @endfor
+                        </tbody>
+                    </table>
+                @endif
                 <div class="row no-gutters aw-main-wrapper">
                     <div class="col-lg-6">
-                        {!! $barChart -> container() !!}
+                        @if ($election->system->value == 'irv')
+                            <iframe height="600" width="600" src="{{ $response['embedUrl'] }}"></iframe>
+                        @else
+                            {!! $barChart -> container() !!}
+                        @endif
                     </div>
                     <div class="col-lg-6">
-                        {!! $pie -> container() !!}
+                        @if ($election->system->value == 'irv')
+                            <iframe height="600" width="600" src="{{ $response['embedSankeyUrl'] }}"></iframe>
+                        @else
+                            {!! $pie -> container() !!}
+                        @endif
                     </div>
                 </div>
                 <div class="row no-gutters aw-main-wrapper">
@@ -56,13 +85,15 @@
     </div>
 
     {{-- Below are the codes for creating the pie and bar charts --}}
-    <script src="{{ $pie->cdn() }}"></script>
-    {{ $pie->script() }}
-    <script src="{{ $barChart->cdn() }}"></script>
-    {{ $barChart->script() }}
-    <script src="{{ $lineChart->cdn() }}"></script>
-    {{ $lineChart->script() }}
-    <script src="{{ $lineChart2->cdn() }}"></script>
-    {{ $lineChart2->script() }}
+    @if ($election->system->value == 'fptp')
+        <script src="{{ $pie->cdn() }}"></script>
+        {{ $pie->script() }}
+        <script src="{{ $barChart->cdn() }}"></script>
+        {{ $barChart->script() }}
+        <script src="{{ $lineChart->cdn() }}"></script>
+        {{ $lineChart->script() }}
+        <script src="{{ $lineChart2->cdn() }}"></script>
+        {{ $lineChart2->script() }}
+    @endif
     
 </x-app-layout>

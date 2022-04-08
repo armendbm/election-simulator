@@ -53,9 +53,17 @@ class VoteController extends Controller
      */
     /* public function store(StoreVoteRequest $request) */
     public function store(Request $request, Election $election)
-    {
+    {   
         $vote = new Vote;
-        $vote->data = $request->vote;
+        switch($election->system->value){
+            case "irv": //Instant Runoff
+                $ranking = array();
+                parse_str($request->ranking, $ranking);
+                $vote->data = implode(":", $ranking["ranking"]);
+                break;
+            default: //First Past The Post
+                $vote->data = $request->vote0;
+        }
         $vote->user_id = $request->user()->id;
         $election->votes()->save($vote);
         // $vote->date = $vote->created_at->format('Y-m-d');

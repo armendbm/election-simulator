@@ -1,0 +1,71 @@
+{
+  "config" : {
+    "contest" : "Nikolaus-Hills",
+    "date" : "2022-04-04",
+    "jurisdiction" : "Sample Data",
+    "office" : "Council",
+    "threshold" : 51
+  },
+  "results" : [ {
+    "round" : 1.0,
+    "tally" : {
+      "Effie Farrell" : 17.0,
+      "Prof. Abner Dooley" : 23.0,
+      "Jedidiah Wolff" : 21.0,
+      "Miss Ethyl Pouros V" : 19.0,
+      "Ivy Tillman" : 20.0
+    },
+    "tallyResults" : [ {
+      "eliminated" : "Effie Farrell",
+      "transfers" : {
+        "Prof. Abner Dooley" : 5.0,
+        "Jedidiah Wolff" : 5.0,
+        "Miss Ethyl Pouros V" : 3.0,
+        "Ivy Tillman" : 4.0
+      }
+    } ]
+  },
+  {
+    "round" : 2.0,
+    "tally" : {
+      "Prof. Abner Dooley" : 28.0,
+      "Jedidiah Wolff" : 26.0,
+      "Miss Ethyl Pouros V" : 22.0,
+      "Ivy Tillman" : 24.0
+    },
+    "tallyResults" : [ {
+      "eliminated" : "Miss Ethyl Pouros V",
+      "transfers" : {
+        "Prof. Abner Dooley" : 5.0,
+        "Jedidiah Wolff" : 8.0,
+        "Ivy Tillman" : 9.0
+      }
+    } ]
+  },
+  {
+    "round" : 3.0,
+    "tally" : {
+      "Prof. Abner Dooley" : 33.0,
+      "Jedidiah Wolff" : 34.0,
+      "Ivy Tillman" : 33.0
+    },
+    "tallyResults" : [ {
+      "eliminated" : "Prof. Abner Dooley",
+      "transfers" : {
+        "Jedidiah Wolff" : 20.0,
+        "Ivy Tillman" : 13.0
+      }
+    } ]
+  },
+  {
+    "round" : 4.0,
+    "tally" : {
+      "Jedidiah Wolff" : 54.0,
+      "Ivy Tillman" : 46.0
+    },
+    "tallyResults" : [ {
+      "elected" : "Jedidiah Wolff"
+    } ]
+  }
+  ]
+}
