@@ -12,7 +12,14 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg text-center">
                 <form method="POST" action="{{ route('elections.votes.store', ['election' => $election->id]) }}">
-                    <p style="padding: 1rem;">Select Candidate:</p>
+                    @if ($election->system->value == "irv")
+                        <p style="padding: 1rem;">Drag Candidates:</p>
+                        <p> Top Candidate as Best </p>
+                    @endif
+                    @if ($election->system->value != "irv")
+                        <p style="padding: 1rem;">Select Candidate:</p>
+                    @endif
+                    
                     @csrf
                     <!--Voting interface changes based on $election->system->value-->
                     @switch($election->system->value) 
