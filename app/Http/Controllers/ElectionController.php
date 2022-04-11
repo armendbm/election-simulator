@@ -200,7 +200,7 @@ class ElectionController extends Controller
                 rewind($myfile);
                 $response = Http::withHeaders([
                     "Authorization" => "Token 9dd5b90a4af6fc9939002dd0db8f9160b5760007",
-                ])->attach('jsonFile', $myfile)->put("https://www.rcvis.com/api/visualizations/");
+                ])->attach('jsonFile', $myfile)->post("https://www.rcvis.com/api/visualizations/");
 
                 fclose($myfile);
                 
