@@ -59,7 +59,6 @@
                                         <tr>
                                             <td>{{ $election->name }}</td>
                                             <td>{{ $election->description }}</td>
-                                            <td>{{ ($election->owner())->name }}</td>
                                             <td>{{ $election->start_at }}</td>
                                             <td>{{ $election->end_at }}</td>
                                             <td>
