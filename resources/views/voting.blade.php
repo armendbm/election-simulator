@@ -27,7 +27,7 @@
                                     <tr>
                                         <td>{{ $election->name }}</td>
                                         <td>{{ $election->description }}</td>
-                                        <td>Not sure how to find the person's name who held the election</td>
+                                        <td>{{ $election->owner->name }}</td>
                                         <td>{{ $election->start_at }}</td>
                                         <td>{{ $election->end_at }}</td>
                                         <td>
@@ -47,6 +47,7 @@
                               <tr>
                                 <th scope="col">Name</th>
                                 <th scope="col">Description</th>
+                                <th scope="col">Held by</th>
                                 <th scope="col">Start date</th>
                                 <th scope="col">End date</th>
                                 <th scope="col">Action</th>
@@ -58,6 +59,7 @@
                                         <tr>
                                             <td>{{ $election->name }}</td>
                                             <td>{{ $election->description }}</td>
+                                            <td>{{ $election->owner->name }}</td>
                                             <td>{{ $election->start_at }}</td>
                                             <td>{{ $election->end_at }}</td>
                                             <td>
