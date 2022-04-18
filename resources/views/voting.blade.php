@@ -47,7 +47,6 @@
                               <tr>
                                 <th scope="col">Name</th>
                                 <th scope="col">Description</th>
-                                <th scope="col">Held by</th>
                                 <th scope="col">Start date</th>
                                 <th scope="col">End date</th>
                                 <th scope="col">Action</th>
